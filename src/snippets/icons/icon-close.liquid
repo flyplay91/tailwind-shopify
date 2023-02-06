@@ -1,0 +1,10 @@
+{%-liquid
+  assign width = width | default: 16
+  assign height = height | default: 16
+  assign fill = fill | default: "#323332"
+-%}
+
+<svg width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.41422 7.99998L15.7782 14.3639L14.364 15.7782L8.00001 9.41419L1.63605 15.7782L0.221832 14.3639L6.58579 7.99998L0.221832 1.63602L1.63605 0.221802L8.00001 6.58576L14.364 0.221802L15.7782 1.63602L9.41422 7.99998Z" fill="{{ fill }}"/>
+</svg>
+  

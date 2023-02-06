@@ -1,0 +1,83 @@
+<div class="lg:hidden">
+  <div class="bg-off-white relative">
+    <div class="ccontain py-8">
+      {%- if subheading != blank -%}
+        <h5 class="sub-s caps">{{ subheading }}</h5>
+      {%- endif -%}
+      <h2>{{ heading }}</h2>
+    </div>
+    <div class="w-full h-full aspect-square">
+      <img loading="lazy" class="w-full h-full object-cover" src="{{ main_image | img_url: '1100x' }}" alt="{{ heading }}">
+    </div>
+    <div class="overflow-hidden absolute bottom-[-250px] z-50 mx-auto pl-6 max-w-[85rem] w-full">
+      <div class="pb-4 flex gap-x-6 scrollbar snap-mandatory lg:grid lg:grid-cols-3 lg:gap-7">
+        {% for block in blocks %}
+          <a target="_blank" href="{{ block.settings.product.url }}" class="min-w-[200px] w-[200px] relative bg-white pb-20 border border-grey-100 snap-center {% if forloop.last %} mr-6 lg:mr-0{% endif %}">
+            <img loading="lazy" class="w-full aspect-square" src="{{ block.settings.product.featured_image | img_url: 'medium' }}" alt="{{ block.settings.product.title }}">
+            <div class="absolute bottom-0 px-3 w-full">
+              <div class="bg-white flex flex-col justify-center items-center py-6 px-3">
+                <p class="p-xs text-center">{{ block.settings.product.title }}</p>
+                <div class="border-t-[3px] border-primary my-4 w-12"></div>
+                <p class="h6 text-center !font-oswald !mb-0">{{ block.settings.product.price | money }}</p>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="mt-[300px] flex justify-center items-center">
+    {%- if cta_link_type == 'button' -%}
+      <a href="{{ cta_url }}">
+        <button class="button button--{{ button_style }}">{{ cta_text }}</button>
+      </a>
+    {%- else -%}
+      <a class="link content-link" href="{{ cta_url }}">{{ cta_text }}</a>
+    {%- endif -%}
+  </div>
+</div>
+<div class="hidden lg:block ccontain min-h-[585px]">
+  <div class="grid grid-cols-6">
+    <div class="col-span-4">
+      <div class="relative grid grid-cols-5 pr-6 pl-[120px]">
+        <div class="col-span-2 py-[170px]">
+          <div class="max-w-[285px]">
+            {%- if subheading != blank -%}
+              <h5 class="sub-s caps mb-4">{{ subheading }}</h5>
+            {%- endif -%}
+            <h2 class="mb-6">{{ heading }}</h2>
+            {%- if cta_link_type == 'button' -%}
+              <a href="{{ cta_url }}">
+                <button class="button button--{{ button_style }}">{{ cta_text }}</button>
+              </a>
+            {%- else -%}
+              <a class="link content-link" href="{{ cta_url }}">{{ cta_text }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="col-span-3 aspect-[4/5] h-full w-full pb-14 pl-12">
+          <img loading="lazy" src="{{ main_image | img_url: '1100x' }}" alt="{{ heading }}" class="w-full h-full object-cover">
+        </div>
+        <div class="bg-off-white w-full h-[85%] absolute bottom-0 left-0 -z-10"></div>
+      </div>
+    </div>
+    <div class="col-span-2 ml-10 flex flex-col justify-center gap-8">
+      {% for block in blocks %}
+        <div class="flex flex-row">
+          <a href="{{ block.settings.product.url }}" target="_blank">
+            <div class="w-full aspect-square lg:w-24 lg:h-24">
+              <img loading="lazy" class="w-full h-full object-cover" src="{{ block.settings.product.featured_image | img_url: 'medium' }}" alt="{{ block.settings.product.title }}">
+            </div>
+          </a>
+          <div class="py-4 xl:ml-2">
+            <a href="{{ block.settings.product.url }}" target="_blank">
+              <p class="p-xs lg:text-p-s lg:font-medium">{{ block.settings.product.title }}</p>
+            </a>
+            <div class="border-t-[3px] border-primary my-4 w-12"></div>
+            <p class="p-s !font-oswald !mb-0">{{ block.settings.product.price | money }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

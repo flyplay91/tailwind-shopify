@@ -1,0 +1,33 @@
+.right-cart {
+  @apply right-[-30rem];
+}
+
+.side-cart-upsells {
+  h3.primary-title {
+    @apply text-left text-h4-m lg:text-h4 mb-0;
+  }
+
+  .rebuy-product-actions {
+    @apply !hidden;
+
+    button.rebuy-button {
+      @apply !hidden;
+    }
+  }
+
+  .rebuy-product-grid {
+    .rebuy-product-block {
+      @apply !items-start !pt-6 !pb-0 !gap-7;
+
+      a.rebuy-product-title.clickable {
+        @apply !mt-0 hover:!underline !text-p-s;
+      }
+
+      .rebuy-product-price {
+        .rebuy-money {
+          @apply !text-h6-m !font-oswald !text-black;
+        }
+      }
+    }
+  }
+}

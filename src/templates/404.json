@@ -1,0 +1,12 @@
+{
+  "name": "404 Template",
+  "sections": {
+    "full-width-hero": {
+      "type": "full-width-hero",
+      "settings": {}
+    }
+  },
+  "order": [
+    "full-width-hero"
+  ]
+}

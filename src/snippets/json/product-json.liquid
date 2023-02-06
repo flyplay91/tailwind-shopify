@@ -1,0 +1,114 @@
+{%- assign tags = product.tags | join: ',' -%}
+
+{%- if product.compare_at_price != blank -%}
+  {%- assign tags = tags | append: ',Sale' -%}
+{%- endif -%}
+
+{%- if product.available == false -%}
+  {%- assign tags = tags | append: ',Out of Stock' -%}
+{%- endif -%}
+
+{%- assign promo_message = product.metafields["custom_fields"]["promo_message"] -%}
+{%- assign product_core_features = product.metafields["custom_fields"]["product_core_features"].value -%}
+
+{%- if product.metafields.global.is_bundle_product and product.metafields.global.bundle_product_children != blank -%}
+  {%- assign bundle_children = product.metafields.global.bundle_product_children.value -%}
+{%- endif -%}
+
+{%- assign selling_plans = product.selling_plan_groups[0].selling_plans -%}
+{%- assign percent_off = selling_plans[0].price_adjustments[0].value -%}
+
+{%- capture product_json -%}
+  {
+    "title": {{- product.title | json -}},
+    "id": {{- product.id | json -}},
+    "handle": {{- product.handle | json -}},
+    "url": {{- product.url | json -}},
+    "feature_image": {{- product.featured_image | img_url: 'master' | json -}},
+    "collectionHandle": {{- collection.handle | json -}},
+    "price": {{- product.price | json -}},
+    "minPrice": {{- product.price_min | json -}},
+    "comparePrice": {{- product.compare_at_price | json -}},
+    "description": {{- product.description | json -}},
+    "promoMessage": {{- promo_message | json -}},
+    "productCoreFeatures": {{- product_core_features | json -}},
+    "bundleChildren": {{- bundle_children | json -}},
+    "defaultVariant": {{- product.selected_or_first_available_variant.id | json -}},
+    "tags": {{- tags | split: ',' | json -}},
+    "type": {{- product.type | json -}},
+    "options": {{- product.options_with_values | json -}},
+    "selling_plan": {{ product.selling_plan_groups | json }},
+    "percentOff": {{- percent_off | json -}},
+    "media": [
+      {%- for image in product.images -%}
+        {%- assign split_alt_text = image.alt | split: '::' -%}
+        {%- assign alt_text = split_alt_text | last -%}
+        {%- if split_alt_text[0] contains 'color:' -%}
+          {%- assign associated_color = split_alt_text | first | split: 'color:' | last | downcase -%}
+        {%- else -%}
+          {%- assign associated_color = null -%}
+        {%- endif -%}
+        {%- assign associated_variant = split_alt_text | first | split: ':' | last | downcase -%}
+        {
+          "variant_image": {{- image | json -}},
+          "image_alt_text": {{- alt_text | json -}},
+          "associated_color": {{- associated_color | json -}},
+          "associated_variant": {{- associated_variant | json -}},
+          "type": "image"
+        }
+        {%- unless forloop.last -%},
+        {%- endunless -%}
+      {%- endfor -%}
+      ],
+    "videos": [
+      {%- for media in product.media -%}
+        {%- if media.media_type == "external_video" or media.media_type == "video" -%}
+          {
+            "external_id": {{- media.external_id | json -}},
+            "host": {{- media.host | json -}},
+            "preview_image": {{- media.preview_image | json -}},
+            "type": {{ media.media_type | json }}
+          }
+          {%- unless forloop.last -%},
+        {%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ],
+    "variants": [
+  {%- for variant in product.variants -%}
+    {
+            "title":
+    {{- variant.title | json -}},
+            "id":
+    {{- variant.id | json -}},
+            "price":
+    {{- variant.price | json -}},
+            "barcode":
+    {{- variant.barcode | json -}},
+            "comparePrice":
+    {{- variant.compare_at_price | json -}},
+            "available":
+    {{- variant.available -}},
+            "images": [
+    {%- for image in variant.metafields.global.variant_images.value -%}
+      {
+                    "variant_image":
+      {{- image | json -}},
+                    "alt":
+      {{- image.alt | default: variant.title | json -}}
+      }
+      {%- unless forloop.last -%},
+      {%- endunless -%}
+    {%- endfor -%}
+    ],
+            "options":
+    {{- variant.options | json -}}
+    }
+    {%- unless forloop.last -%},
+    {%- endunless -%}
+  {%- endfor -%}
+  ]
+  }
+{%- endcapture -%}
+
+{{- product_json | replace: "'", "’" -}}

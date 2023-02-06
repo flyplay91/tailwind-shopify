@@ -1,0 +1,12 @@
+{%-liquid
+  assign width = width | default: 16
+  assign height = height | default: 16
+  assign fill = fill | default: "#000000"
+-%}
+
+<svg width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5.66667 15H2.55556C1.69645 15 1 14.3036 1 13.4444V2.55556C1 1.69645 1.69645 1 2.55556 1H5.66667" stroke="{{ fill }}" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14.9998 8H5.6665" stroke="{{ fill }}" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M11.1113 11.8889L15.0002 8L11.1113 4.11111" stroke="{{ fill }}" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+  

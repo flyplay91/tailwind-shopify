@@ -1,0 +1,99 @@
+{%- liquid
+  assign show = false
+  assign heading = section.settings.heading
+  assign background = section.settings.background
+  assign layout_type = section.settings.layout_type
+  assign blocks = section.blocks
+
+  if blocks.size > 5
+    assign show = true
+  endif
+-%}
+
+{%- if show -%}
+  {%- render 'category-navigation' show: show, heading: heading, background: background, layout_type: layout_type, blocks: blocks -%}
+
+  {%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+{%- endif -%}
+
+{% schema %}
+
+{
+  "name": "Category Navigation",
+  "tag": "section",
+  "class": "category-navigation__conatiner",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "id": "heading",
+      "label": "Section Heading",
+      "type": "text"
+    }, {
+      "id": "background",
+      "label": "Section Background",
+      "type": "checkbox",
+      "info": "Enabling this will set a full-width grey background behind section",
+      "default": false
+    }, {
+      "id": "layout_type",
+      "label": "Layout Type",
+      "type": "select",
+      "info": "Select which type of layout you'd like the content to follow - grid wrapping or scrolling.",
+      "options": [
+        {
+          "value": "wrap",
+          "label": "Wrap"
+        }, {
+          "value": "scroll",
+          "label": "Scroll"
+        }
+      ]
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Category",
+      "type": "category",
+      "settings": [
+        {
+          "id": "image",
+          "label": "Category Image",
+          "type": "image_picker"
+        }, {
+          "id": "category_title",
+          "label": "Category Title",
+          "type": "text"
+        }, {
+          "id": "category_url",
+          "label": "Category Url",
+          "type": "url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Navigation"
+    }
+  ]
+}
+
+{% endschema %}

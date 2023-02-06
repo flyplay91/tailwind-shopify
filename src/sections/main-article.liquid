@@ -1,0 +1,49 @@
+<div class="ccontain py-8">
+  <div class="max-w-[996px] mx-auto py-10">
+    <a href="{{ blog.url }}" class="inline-flex sub-l caps items-center">
+      {%- render 'icon-back' -%}
+      <span class="ml-4">Back</span>
+    </a>
+    <div class="flex flex-row gap-[6px] flex-wrap mt-[40px]">
+      {%- for tag in article.tags -%}
+        <div class="sub-s caps text-primary leading-[2px]">
+          <a href="{{ blog.url }}/tagged/{{ tagName | handleize }}">{{ tag }}</a>
+          {%- unless forloop.last -%},
+          {%- endunless -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    <h1 class="mt-4 lg:mt-6">{{ article.title }}</h1>
+
+    <div class="flex items-center mt-8 lg:mt-[40px]">
+      <p class="p-l mr-6 text-grey-500">{{ article.published_at | date: "%m/%-d/%Y" }}</p>
+      <div class="flex-1 flex items-center">
+        <span class="p-l mr-6">Share</span>
+        <div class="flex items-center -mx-2">
+          <a class="inline-block mx-2 text-mine-shaft hover:text-green-leaf" href="https://www.linkedin.com/shareArticle?mini=true&url={{ shop.url | url_encode }}{{ article.url | url_encode }}">
+            {%- render 'icon-linkedin', fill: '#323232', width: 16, height: 16 -%}
+          </a>
+          <a class="inline-block mx-2" href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | url_encode }}{{ article.url | url_encode }}">
+            {%- render 'icon-facebook', fill: '#323232', width: 16, height: 16 -%}
+          </a>
+          <a class="inline-block mx-2" href="https://twitter.com/intent/tweet?url={{ shop.url | url_encode }}{{ article.url | url_encode }}&text=">
+            {%- render 'icon-twitter', fill: '#323232', width: 16, height: 16 -%}
+          </a>
+          <a class="inline-block mx-2" href="http://pinterest.com/pin/create/button/?url={{ shop.url | url_encode }}{{ article.url | url_encode }}">
+            {%- render 'icon-pinterest', fill: '#323232', width: 16, height: 16 -%}
+          </a>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+
+{%- if article.image -%}
+  <div>
+    <img loading="lazy" class="w-full max-h-[542px] object-cover" src="{{ article.image | image_url }}" alt="{{ article.title }}"/>
+  </div>
+{%- endif -%}
+
+<div class="max-w-[1144px] mx-auto my-16 lg:my-[92px] px-6 wysiwyg overflow-hidden">
+    {{- article.content -}}
+</div>

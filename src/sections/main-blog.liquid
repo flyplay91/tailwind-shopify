@@ -1,0 +1,60 @@
+{%-liquid
+  assign navItems = section.blocks
+-%}
+
+{%- render 'blog-hero', blog: blog -%}
+
+{%- if navItems.size > 0 -%}
+  {%- render 'blog-nav', blog: blog, navItems: navItems -%}
+{%- endif -%}
+
+<div class="ccontain mt-6 lg:mt-12 mb-12 lg:mb-[72px]">
+  {% paginate blog.articles by 3 %}
+    <div class="grid grid-cols-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 lg:gap-y-20">
+      {% for article in blog.articles %}
+        <div class="lg:pb-6">
+          {% render 'article-tile' article: article %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="mt-14 lg:mt-[120px]">
+      {% render 'custom-pagination' paginate: paginate %}
+    </div>
+  {% endpaginate %}
+</div>
+
+{% schema %}
+
+{
+  "name": "Blog",
+  "settings": [
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Nav Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag_name",
+          "label": "Tag Name",
+          "info": "This is an article tag name to be filtered"
+        }, {
+          "type": "text",
+          "id": "nav_title",
+          "label": "Nav Title",
+          "info": "This is a title of navgiation item"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog"
+    }
+  ],
+  "templates": ["blog"]
+}
+
+{% endschema %}

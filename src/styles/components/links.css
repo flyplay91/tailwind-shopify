@@ -1,0 +1,60 @@
+a {
+  @apply transition-all duration-200;
+}
+
+a.inline-link {
+  @apply underline hover:text-black;
+}
+
+a.content-link, .content-link {
+  @apply font-roboto-condensed;
+  background:
+		linear-gradient(to right, #000, #000),
+		linear-gradient(to right, var(--primary), var(--primary));
+  background-size: 100% 3px, 0 3px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+	transition: background-size 400ms;
+  padding-bottom: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+
+  &:hover,
+  &:focus {
+    background-size: 0 3px, 100% 3px;
+  }
+}
+
+.page-hero a.content-link {
+  color: #fff;
+  background:
+		linear-gradient(to right, #fff, #fff),
+		linear-gradient(to right, var(--primary), var(--primary));
+  background-size: 100% 3px, 0 3px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+
+  &:hover,
+  &:focus {
+    background-size: 0 3px, 100% 3px;
+  }
+}
+
+.reversible-5050__container, .full-width-hero__conatiner {
+  a:not(.content-link) {
+    @apply underline hover:text-black;
+  }
+}
+
+[data-links-group] {
+  &:hover {
+    [data-links-group-item] {
+      @apply text-grey-600;
+
+      &:hover {
+        @apply text-grey-800 underline;
+      }
+    }
+  }
+}

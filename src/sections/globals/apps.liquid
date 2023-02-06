@@ -1,0 +1,56 @@
+<div class="{% if section.settings.include_container %}ccontain grid{% endif %}">
+  {%- for block in section.blocks -%}
+    {% render block %}
+  {%- endfor -%}
+</div>
+
+{%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+
+{% schema %}
+
+{
+  "name": "App Wrapper",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "include_container",
+      "default": true,
+      "label": "Place app inside of page container."
+    }, {
+      "type": "header",
+      "content": "Spacing"
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "App Wrapper"
+    }
+  ]
+}
+
+{% endschema %}

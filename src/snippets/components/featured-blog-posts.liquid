@@ -1,0 +1,45 @@
+<div class="lg:mx-auto lg:px-6 lg:max-w-[85rem] w-full">
+  <div class="flex flex-col lg:flex-row items-center lg:justify-between">
+    <h3 class="mb-6">{{ title }}</h3>
+    <a class="lg:pr-4" href="/blogs/{{ featured_blog }}">
+      <button class="button button--tertiary button--small mb-8 mt-1">
+        {{ cta_text }}
+      </button>
+    </a>
+  </div>
+  <div class="overflow-hidden pl-6 lg:p-0">
+    <div class="pb-10 flex gap-x-6 scrollbar snap-mandatory lg:grid lg:grid-cols-3 lg:gap-7">
+      {% for article in featured_blog.articles %}
+        {%- unless forloop.index > 3 -%}
+          {%- if article.title != blank and article.image.src != blank -%}
+            <div {% if forloop.index == 3 %} class="pr-6 lg:pr-0" {% endif %}>
+              <div class="mx-auto shrink-0 relative w-[300px] h-[375px] lg:w-full lg:h-[500px] flex items-end mb-4">
+                <div class="absolute top-0 left-0 h-full w-full snap-center">
+                  <img class="object-cover h-full w-full" src="{{ article.image.src | img_url: '500x' }}" alt="{{ article.title }}">
+                </div>
+                <div class="w-full z-10 py-4 pr-3 flex flex-row justify-start items-center" style="background: rgba(0, 0, 0, .65)">
+                  <div class="w-[6px] h-14 bg-primary mr-4"></div>
+                  <h4 class="text-white">{{ article.title }}</h4>
+                </div>
+              </div>
+              <div class="lg:px-4">
+                {%- if article.tags.size > 0 -%}
+                  <div class="flex flex-row gap-[6px] flex-wrap mb-4">
+                    {%- for tag in article.tags -%}
+                      <p class="sub-s caps text-primary leading-[2px]">{{ tag }}
+                        {%- unless forloop.last -%},
+                        {%- endunless -%}
+                      </p>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+                <p class="p-s mb-4">{{ article.excerpt }}</p>
+                <a class="content-link" href="{{ article.url }}">Read More</a>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endunless -%}
+      {% endfor %}
+    </div>
+  </div>
+</div>

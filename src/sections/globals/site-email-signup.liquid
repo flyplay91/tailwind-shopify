@@ -1,0 +1,57 @@
+{%- capture email_signup_settings -%}
+  {
+            "title":
+  {{- section.settings.email_signup_title | json -}},
+            "content":
+  {{- section.settings.email_signup_content | json -}},
+            "successMessage":
+  {{- section.settings.success_message | json -}},
+            "errorMessage":
+  {{- section.settings.error_message | json -}},
+            "klaviyoListId":
+  {{- section.settings.klaviyo_list_id | json -}}
+  }
+{%- endcapture -%}
+
+{%- assign email_signup_settings = email_signup_settings | replace: "'", "’" -%}
+
+<div id="EmailSignup" props='{{- email_signup_settings -}}'></div>
+
+{% schema %}
+
+{
+  "name": "Email Signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    }, {
+      "type": "text",
+      "id": "email_signup_title",
+      "label": "Email Signup Title",
+      "default": "Signup"
+    }, {
+      "type": "richtext",
+      "id": "email_signup_content",
+      "label": "Email Signup Content",
+      "default": "<p>Signup for our email list!</p>"
+    }, {
+      "type": "text",
+      "id": "success_message",
+      "label": "Email Signup Success Message",
+      "default": "You've signed up!"
+    }, {
+      "type": "text",
+      "id": "error_message",
+      "label": "Email Signup Error Message",
+      "default": "Oops, something went wrong!"
+    }, {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "Klaviyo List Id"
+    }
+  ]
+}
+
+{% endschema %}

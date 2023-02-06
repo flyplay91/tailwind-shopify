@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "page-with-sidebar": {
+      "type": "page-with-sidebar",
+      "settings": {
+        "bottom_margin_mobile": 40,
+        "bottom_margin_desktop": 70,
+        "page_menu": ""
+      }
+    },
+    "3517f831-4cac-4afe-9c0d-46f700ab80c7": {
+      "type": "content-accordions",
+      "blocks": {
+        "0967f9dc-7c30-4ece-9b08-1b5452fd5d25": {
+          "type": "Accordion",
+          "settings": {
+            "heading": "Details",
+            "body": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua click the link here. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>"
+          }
+        },
+        "05d3c799-9aad-4c5d-bd99-b27da4f214c1": {
+          "type": "Accordion",
+          "settings": {
+            "heading": "Core Features & Technology",
+            "body": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua click the link here. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>"
+          }
+        },
+        "d2443b1c-14ab-49bf-b184-2aa9bf77fa16": {
+          "type": "Accordion",
+          "settings": {
+            "heading": "Product Care",
+            "body": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua click the link here. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>"
+          }
+        },
+        "633f4100-335f-486e-ba70-58fbc8db6844": {
+          "type": "Accordion",
+          "settings": {
+            "heading": "Shipping & Returns",
+            "body": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua click the link here. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>"
+          }
+        },
+        "f1e7d755-6399-45f8-963f-fb961ae9ee5e": {
+          "type": "Accordion",
+          "settings": {
+            "heading": "Title Goes Here",
+            "body": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua click the link here. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "0967f9dc-7c30-4ece-9b08-1b5452fd5d25",
+        "05d3c799-9aad-4c5d-bd99-b27da4f214c1",
+        "d2443b1c-14ab-49bf-b184-2aa9bf77fa16",
+        "633f4100-335f-486e-ba70-58fbc8db6844",
+        "f1e7d755-6399-45f8-963f-fb961ae9ee5e"
+      ],
+      "settings": {
+        "title": "Header Text Here",
+        "description": "<p>This is an example of a paragraph. Lorem ipsum dorem a sum lorem ipsum dorem a sum.<\/p>",
+        "cta_label": "Learn More",
+        "cta_link": "shopify:\/\/collections",
+        "bottom_padding_desktop": 40,
+        "bottom_padding_mobile": 24
+      }
+    }
+  },
+  "order": [
+    "page-with-sidebar",
+    "3517f831-4cac-4afe-9c0d-46f700ab80c7"
+  ]
+}

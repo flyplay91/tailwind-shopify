@@ -1,0 +1,868 @@
+
+#collectionTemplate {
+  .boost-pfs-filter-collection-header-wrapper {
+    @apply py-0 md:py-[94px];
+
+    .boost-pfs-container-default-box {
+      @apply py-8 md:py-0 md:max-w-[600px] mx-auto;
+    }
+
+    .boost-pfs-filter-collection-header {
+      @apply text-h2-m md:text-h2;
+
+      &:after {
+        @apply block w-[50px] h-[3px] mt-4 mx-auto bg-primary;
+        content: "";
+      }
+    }
+
+    .boost-pfs-filter-collection-description {
+      @apply mt-4 text-grey-100 text-p-s md:text-p;
+    }
+
+    &[data-bg-color="primary"] {
+      @apply bg-primary text-white;
+    }
+
+    &[data-bg-color="secondary"] {
+      @apply bg-secondary text-white;
+    }
+
+    &[data-bg-color="black"] {
+      @apply bg-black text-white;
+    }
+
+    &[data-bg-color="alternate"] {
+      @apply bg-alternate text-white;
+    }
+
+    &[data-bg-color="grey"] {
+      @apply bg-grey-800 text-white;
+    }
+
+    &[data-bg-color="white"] {
+      @apply bg-white text-black;
+
+      .boost-pfs-filter-collection-description {
+        @apply text-black;
+      }
+    }
+
+    &.boost-pfs-filter-collection-has-image {
+      @apply text-white md:py-[50px];
+
+      .boost-pfs-filter-collection-header {
+        @apply text-left md:text-center;
+
+        &:after {
+          @apply ml-0 md:mx-auto;
+          content: "";
+        }
+      }
+
+      .boost-pfs-container-default-box {
+        @apply bg-black px-6 md:px-[94px] md:py-16;
+        --tw-bg-opacity: 0.7;
+      }
+
+      .boost-pfs-filter-collection-description {
+        @apply text-left md:text-center text-grey-100;
+      }
+    }
+  }
+
+  .boost-pfs-filter-wrapper {
+    @apply flex;
+
+    .boost-pfs-filter-left-col {
+      @apply w-[242px] float-none pt-12;
+
+      .boost-pfs-filter-tree-v {
+        .boost-pfs-filter-refine-by {
+          @apply mb-0 pb-4 border-b border-solid border-grey-100;
+          
+          .boost-pfs-filter-option-title {
+            @apply flex items-center justify-between pb-4 border-b border-solid border-grey-100;
+
+            &:after {
+              @apply hidden;
+            }
+
+            .boost-pfs-filter-option-title-heading {
+              @apply flex items-center w-auto p-0;
+
+              &:before {
+                @apply flex items-center justify-center w-6 h-6 mr-2;
+                content: url('data:image/svg+xml; utf8, <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg"><line y1="-0.75" x2="2.99708" y2="-0.75" transform="matrix(1 0 0 -1 0.506348 13.3767)" stroke="black" stroke-width="1.5"/><line y1="-0.75" x2="8.65823" y2="-0.75" transform="matrix(1 0 0 -1 0.506348 7.96533)" stroke="black" stroke-width="1.5"/><line y1="-0.75" x2="6.66018" y2="-0.75" transform="matrix(1 0 0 -1 0.506348 2.55383)" stroke="black" stroke-width="1.5"/><line y1="-0.75" x2="8.99124" y2="-0.75" transform="matrix(1 0 0 -1 4.50244 13.3767)" stroke="black" stroke-width="1.5"/><line y1="-0.75" x2="3.33009" y2="-0.75" transform="matrix(1 -1.42062e-07 -5.37986e-08 -1 10.1636 7.96533)" stroke="black" stroke-width="1.5"/><line y1="-0.75" x2="5.32814" y2="-0.75" transform="matrix(1 1.42062e-07 5.37986e-08 -1 8.16553 2.55396)" stroke="black" stroke-width="1.5"/><line x1="7.04126" y1="4.71838" x2="7.04126" y2="0.750029" stroke="black"/><line x1="9.20581" y1="9.58862" x2="9.20581" y2="5.62027" stroke="black"/><line x1="3.25317" y1="15" x2="3.25317" y2="11.0316" stroke="black"/></svg>');
+              }
+            }
+
+            .boost-pfs-filter-clear-all {
+              @apply flex items-center text-sub-xxs font-semibold font-roboto-condensed uppercase leading-none tracking-[1px];
+
+              &:before {
+                @apply flex items-center justify-center w-4 h-4 mr-1;
+                content: url('data:image/svg+xml; utf8, <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4831 3.76565L3.76554 10.4832" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51694 3.76565L10.2345 10.4832" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+              }
+            }
+          }
+
+          .boost-pfs-filter-refine-by-items {
+            @apply m-0;
+
+            .refine-by-item {
+              @apply mt-4 mb-0;
+
+              .refine-by-type {
+                @apply text-p-s;
+              }
+            }
+
+            .boost-pfs-filter-clear {
+              @apply flex items-center justify-between p-0;
+
+              &:before {
+                @apply hidden;
+              }
+
+              &:after {
+                @apply static flex items-center justify-center w-4 h-4 border-0 rotate-90 mr-5;
+                content: url('data:image/svg+xml; utf8, <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4831 3.76565L3.76554 10.4832" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51694 3.76565L10.2345 10.4832" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+              }
+            }
+          }
+        }
+
+        .boost-pfs-filter-option-title-heading {
+          @apply relative w-full py-0 pl-7 pr-5;
+
+          .boost-pfs-filter-option-title-text {
+            @apply text-sub-m normal-case;
+
+            &:before {
+              @apply hidden;
+              content: none;
+            }
+
+            &:after {
+              @apply touch-none pointer-events-none absolute top-1/2 right-5 w-auto h-auto leading-none border-0 -translate-y-1/2 rotate-0;
+              content: url('data:image/svg+xml; utf8, <svg fill="none" height="7" viewbox="0 0 12 7" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M10.4697 0.469727L11.5303 1.53039L6.53033 6.53039C6.26406 6.79665 5.8474 6.82086 5.55378 6.603L5.46967 6.53039L0.469666 1.53039L1.53033 0.469727L6 4.93906L10.4697 0.469727Z" fill="black"/></svg>');
+            }
+          }
+
+          &[aria-expanded="true"] {
+            .boost-pfs-filter-option-title-text:after {
+              @apply -translate-y-1/2 rotate-180;
+            }
+          }
+        }
+
+        .boost-pfs-filter-option-list {
+          .boost-pfs-filter-option-title {
+            .boost-pfs-filter-clear {
+              @apply hidden;
+            }
+          }
+        }
+
+        .boost-pfs-filter-option {
+          @apply pt-5 pb-6 border-t-0 border-b border-solid border-grey-100;
+          
+          .boost-pfs-filter-option-content {
+            .boost-pfs-filter-option-content-inner {
+              @apply mt-6;
+            }
+
+            .boost-pfs-filter-option-item-list {
+              @apply m-0 pl-0 pr-5;
+
+              .boost-pfs-filter-option-item {
+                @apply text-p-s my-3;
+              }
+
+              &:not(.boost-pfs-filter-option-item-list-single-list) {
+                @apply pl-5;
+              }
+
+              &.boost-pfs-filter-option-item-list-single-list {
+                .boost-pfs-filter-option-item {
+                  @apply pl-7 border-l-2 border-solid border-white;
+
+                  &.selected {
+                    @apply border-primary;
+
+                    a,
+                    button {
+                      @apply text-primary;
+                    }
+                  }
+                }
+              }
+
+              &.boost-pfs-filter-option-item-list-multiple-list {
+                .boost-pfs-filter-option-item {
+                  @apply pl-8;
+
+                  .boost-pfs-check-box {
+                    @apply border border-solid border-grey-100 w-6 h-6 left-0 top-1/2 -translate-y-1/2;
+                  }
+
+                  &.selected {
+                    .boost-pfs-check-box {
+                      @apply border-grey-800 bg-grey-800;
+
+                      &:before {
+                        @apply absolute w-auto h-auto border-0 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 text-white;
+                        content: url('data:image/svg+xml; utf8, <svg width="14" height="10" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.8033 9.23528L14.2886 0.75L15.3492 1.81066L5.8033 11.3566L0.5 6.0533L1.56066 4.99264L5.8033 9.23528Z" fill="white"/></svg>');
+                      }
+                    }
+                  }
+                }
+              }
+
+              &.boost-pfs-filter-option-item-list-swatch {
+                .boost-pfs-filter-option-swatch-image {
+                  @apply border border-solid border-grey-300;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .boost-pfs-filter-right-col {
+      @apply flex-1 w-auto float-none ml-0 md:ml-6 lg:ml-[46px] p-0;
+
+      .boost-pfs-filter-default-toolbar {
+        @apply border-0 mb-0;
+
+        .boost-pfs-filter-default-toolbar-inner {
+          @apply py-4 md:py-6;
+        }
+
+        .boost-pfs-filter-toolbar-item.boost-pfs-filter-toolbar-count {
+          @apply text-left justify-start text-p-s tracking-[0.3px] text-grey-600;
+        }
+
+        .boost-pfs-filter-top-sorting {
+          @apply md:flex items-center;
+      
+          label {
+            @apply text-sub-s font-semibold font-roboto-condensed uppercase tracking-[2px] whitespace-nowrap mr-4;
+          }
+      
+          button {
+            @apply text-left transition-all duration-200 cursor-pointer min-w-[12rem] px-5 py-4 border border-solid border-grey-100 hover:border-grey-300 focus:border-black active:border-black placeholder:text-grey-700;
+      
+            > span {
+              &:after {
+                content: url('data:image/svg+xml; utf8, <svg fill="none" height="7" viewbox="0 0 12 7" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M10.4697 0.469727L11.5303 1.53039L6.53033 6.53039C6.26406 6.79665 5.8474 6.82086 5.55378 6.603L5.46967 6.53039L0.469666 1.53039L1.53033 0.469727L6 4.93906L10.4697 0.469727Z" fill="black"/></svg>');
+                touch-action: none;
+                pointer-events: none;
+                transform: translateY(-50%);
+                position: absolute;
+                top: 60%;
+                right: 0;
+                width: 1rem;
+                line-height: 0;
+                width: auto;
+                height: auto;
+                transform: rotate(0);
+                border: none;
+              }
+            }
+          }
+      
+          &.boost-pfs-filter-sort-active {
+            button>span:after {
+              @apply rotate-[180deg] mt-0;
+            }
+          }
+        }
+      }
+
+      .boost-pfs-filter-products {
+        @apply grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-x-3 md:gap-x-11 md:gap-y-10 m-0 w-full md:w-auto;
+
+        .boost-pfs-filter-product-item {
+          @apply p-0 m-0 w-auto mb-4 md:mb-0;
+
+          &.boost-pfs-filter-product-item-list {
+            @apply col-span-2 md:col-span-3 mb-0 border-t border-solid border-grey-100;
+
+            .boost-pfs-filter-product-item-inner {
+              @apply flex items-center;
+
+              .boost-pfs-filter-product-bottom {
+                @apply px-0 py-[30px] ml-6;
+              }
+            }
+          }
+          .boost-pfs-filter-product-item-image {
+            img.boost-pfs-filter-product-item-flip-image {
+              @apply !hidden md:!block;
+            }
+          }
+
+          &.has-bc-swap-image {
+            .boost-pfs-filter-product-item-image {
+              &:hover {
+                .boost-pfs-filter-product-item-main-image {
+                  @apply visible md:hidden;
+                }
+              }
+            }
+          }
+
+          .boost-pfs-filter-product-item-title {
+            @apply text-p-s font-medium mb-0 lg:mb-0;
+          }
+
+          .boost-pfs-filter-product-item-price {
+            .boost-pfs-filter-product-item-regular-price {
+              @apply text-p-s tracking-[0.3px] font-bold;
+            }
+
+            .boost-pfs-filter-product-item-sale-price {
+              @apply text-p-s text-error tracking-[0.3px] font-bold;
+            }
+
+            s {
+              @apply text-p-s text-grey-600 tracking-[0.3px] font-semibold ml-2;
+            }
+          }
+
+          .boost-pfs-filter-product-item-price__desktop {
+            @apply hidden md:block;
+          }
+
+          .boost-pfs-filter-product-item-price__mobile {
+            @apply block md:hidden mt-2;
+
+            .boost-pfs-filter-product-item-price {
+              @apply font-oswald
+            }
+          }
+
+          .boost-pfs-filter-product-item-badge-container {
+            @apply min-h-[16px] mb-3;
+          }
+
+          .boost-pfs-filter-product-item-badge {
+            @apply flex;
+
+            .boost-pfs-filter-product-item-badge__inner {
+              @apply text-sub-xxs md:text-sub-xs font-semibold font-roboto-condensed uppercase tracking-[1px];
+            }
+          }
+
+          .boost-pfs-filter-product-bottom {
+            @apply pt-[38px] md:pt-4 relative md:static;
+
+            .boost-pfs-filter-product-bottom-inner {
+              @apply !min-h-0;
+            }
+          }
+
+          .boost-pfs-filter-item-swatch__container {
+            @apply hidden md:block overflow-auto mt-2;
+
+            .glide__slide {
+              @apply !w-14;
+            }
+            
+            .glide__arrow {
+              @apply flex items-center justify-center absolute top-1/2 -translate-y-1/2 w-6 h-6 bg-black; 
+            }
+
+            .glide__arrow--left {
+              @apply left-0;
+
+              &:after {
+                @apply leading-none;
+                content: url('data:image/svg+xml; utf8, <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.03027 10.9697L5.96961 12.0303L0.969614 7.03033C0.703347 6.76406 0.679141 6.3474 0.896996 6.05378L0.969614 5.96967L5.96961 0.969666L7.03027 2.03033L2.56094 6.5L7.03027 10.9697Z" fill="white"/></svg>');
+              }
+            }
+
+            .glide__arrow--right {
+              @apply right-0;
+
+              &:after {
+                @apply leading-none;
+                content: url('data:image/svg+xml; utf8, <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.969727 2.03033L2.03039 0.969674L7.03039 5.96967C7.29665 6.23594 7.32086 6.6526 7.103 6.94622L7.03039 7.03033L2.03039 12.0303L0.969727 10.9697L5.43906 6.5L0.969727 2.03033Z" fill="white"/></svg>');
+              }
+            }
+          }
+
+          .boost-pfs-filter-item-swatch {
+            @apply flex m-0 p-0;
+
+            li {
+              @apply m-0 ml-2 p-2 border border-solid border-grey-100;
+
+              &:first-child {
+                @apply ml-0;
+              }
+
+              &.active,
+              &:hover {
+                @apply border-black;
+              }
+
+              span {
+                @apply w-10 h-10 border-0 shadow-none;
+              }
+            }
+          }
+
+          .boost-pfs-filter-item-swatch__label {
+            @apply hidden md:block mt-2 text-p-s text-grey-600;
+          }
+
+          .boost-pfs-filter-item-swatch__count {
+            @apply md:hidden text-p-s text-grey-600;
+          }
+
+          .boost-pfs-filter-product-item__quickAdd {
+            @apply absolute hidden left-0 bottom-0 w-full p-4 z-20;
+
+            button {
+              @apply relative w-full bg-white border border-solid border-black uppercase text-p-s text-black font-bold tracking-[1px] p-3;
+              --tw-bg-opacity: .75;
+            }
+
+            ul {
+              @apply hidden justify-center absolute bg-white top-0 left-0 w-full h-full list-none items-center justify-center my-0 p-3;
+
+              &.active {
+                @apply md:flex;
+              }
+
+              li {
+                @apply flex-1 mx-1 text-center px-0 py-1 text-p-xs tracking-[0.3px] text-black font-semibold border border-solid border-transparent bg-off-white;
+
+                &.active {
+                  @apply border-black;
+                }
+              }
+            }
+          }
+
+          .boost-pfs-filter-product-item-image:hover {
+            .boost-pfs-filter-product-item__quickAdd {
+              @apply md:block;
+            }
+          }
+
+          .stamped-product-reviews-badge {
+            .stamped-badge {
+              @apply cursor-default;
+            }
+
+            .stamped-badge-caption {
+              @apply text-sub-m lg:text-sub font-semibold font-roboto-condensed uppercase tracking-[2px];
+            }
+
+            .stamped-badge-caption[data-reviews][data-label][data-version="2"]>span {
+              @apply !hidden;
+            }
+          }
+        }
+      }
+
+      .boost-pfs-filter-btn-load-previous-page-wrapper {
+        @apply !hidden;
+      }
+
+      .boost-pfs-filter-load-more {
+        @apply p-0;
+
+        .boost-pfs-filter-load-more-total {
+          @apply m-0 text-p-xs text-black tracking-[0.3px] normal-case;
+        }
+
+        .boost-pfs-filter-load-more-progress {
+          @apply flex justify-center my-4;
+        }
+
+        .boost-pfs-filter-load-more-progress__inner {
+          @apply inline-block relative w-[180px] h-[5px] bg-grey-100;
+
+          span {
+            @apply inline-block absolute left-0 top-0 h-full bg-primary;
+          }
+        }
+
+        .boost-pfs-filter-load-more-button {
+          @apply font-roboto-condensed py-3 px-6 text-p-s leading-6 tracking-[1px] font-bold uppercase transition duration-200 text-white bg-black hover:bg-grey-700;
+        }
+      }
+    }
+  }
+
+  .boost-pfs-filter-toolbar-top-mobile {
+    @apply mb-0 mt-6 px-6 border-0;
+
+    .boost-pfs-filter-toolbar-top-mobile-inner {
+      @apply grid grid-cols-2 gap-3;
+
+      .boost-pfs-filter-tree-mobile-button {
+        @apply w-auto;
+
+        button {
+          @apply text-center uppercase border border-solid border-black py-1 px-2 text-p-s text-black font-roboto-condensed font-bold tracking-[1px];
+
+          &:before {
+            @apply hidden;
+          }
+        }
+      }
+
+      .boost-pfs-filter-top-sorting-mobile {
+        @apply w-auto;
+
+        button {
+          @apply flex items-center text-center border border-solid font-roboto-condensed border-black py-1 px-2;
+
+          > span {
+            > span {
+              @apply uppercase text-p-s text-black font-bold;
+            }
+
+            &:after {
+              @apply hidden;
+            }
+          }
+        }
+
+        .boost-pfs-filter-filter-dropdown {
+          @apply left-auto right-0 m-0;
+        }
+      }
+    }
+  }
+
+  .boost-pfs-filter-tree-mobile-style2.boost-pfs-filter-tree-v.boost-pfs-filter-tree-mobile-open {
+    width: calc(100% - 72px)!important;
+
+    .boost-pfs-filter-tree-content {
+      @apply flex flex-col pt-0 pb-20;
+
+      .boost-pfs-filter-mobile-toolbar {
+        @apply flex border-b border-solid border-grey-100;
+
+        .boost-pfs-filter-mobile-toolbar-top {
+          @apply w-[72px];
+
+          .boost-pfs-filter-close {
+            @apply bg-black;
+            --tw-bg-opacity: 0.7;
+
+            span {
+              @apply flex items-center justify-center bg-off-white m-0 w-full h-[72px];
+
+              &:before {
+                @apply static w-auto h-auto transform-none;
+                content: url('data:image/svg+xml; utf8, <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.4155 0L10 8.41552L1.58448 0L0 1.58447L8.41553 10L0 18.4155L1.58448 20L10 11.5845L18.4155 20L20 18.4155L11.5845 10L20 1.58447L18.4155 0Z" fill="black"/></svg>');
+              }
+
+              &:after {
+                @apply hidden;
+                content: none;
+              }
+            }
+          }
+        }
+
+        .boost-pfs-filter-mobile-toolbar-items {
+          @apply flex-1 flex border-0 border-l border-solid border-grey-100 p-0;
+
+          .boost-pfs-filter-mobile-toolbar-left {
+            @apply flex items-center justify-center w-auto min-w-[20px];
+
+            .boost-pfs-filter-back-btn {
+              @apply px-6;
+
+              &:before {
+                @apply static transform-none p-0 border-0;
+                content: url('data:image/svg+xml; utf8, <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.67053 10.6099L5.60987 11.6705L0.609872 6.67052C0.343605 6.40426 0.319399 5.98759 0.537254 5.69398L0.609872 5.60986L5.60987 0.609863L6.67053 1.67052L2.2012 6.14019L6.67053 10.6099Z" fill="black"/></svg>');
+              }
+            }
+          }
+
+          .boost-pfs-filter-mobile-toolbar-middle {
+            @apply flex-1 flex items-center w-auto h-[72px] font-roboto-condensed tracking-[2px];
+          }
+
+          .boost-pfs-filter-mobile-toolbar-right {
+            @apply w-auto;
+
+            .boost-pfs-filter-clear-all,
+            .boost-pfs-filter-clear {
+              @apply flex items-center h-[72px] px-8 text-sub-xxs font-semibold font-roboto-condensed uppercase tracking-[1px] border-0 border-l border-solid border-grey-100;
+
+              &:before {
+                @apply flex mr-1 leading-none;
+                content: url('data:image/svg+xml; utf8, <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4832 3.76565L3.76564 10.4832" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51685 3.76565L10.2344 10.4832" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+              }
+            }
+          }
+        }
+      }
+
+      .boost-pfs-filter-options-wrapper {
+        @apply flex-1 static w-full p-0 overflow-auto;
+  
+        .boost-pfs-filter-option {
+          @apply border-0 ;
+          
+          .boost-pfs-filter-option-title {
+            @apply py-5 pl-6 pr-6 border-0 border-l-4 border-b border-solid border-grey-100 border-grey-100;
+
+            .boost-pfs-filter-option-title-heading {
+              @apply flex items-center justify-between pr-0 text-sub-m text-grey-800 font-semibold normal-case;
+
+              &:after {
+                @apply static h-auto border-0 -rotate-90 transition-transform ease-in-out leading-none;
+                content: url('data:image/svg+xml; utf8, <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4697 0.469727L11.5303 1.53039L6.53033 6.53039C6.26406 6.79665 5.8474 6.82086 5.55378 6.603L5.46967 6.53039L0.469666 1.53039L1.53033 0.469727L6 4.93906L10.4697 0.469727Z" fill="black"/></svg>');
+              }
+            }
+  
+            .boost-pfs-filter-selected-items-mobile {
+              @apply text-p-s mt-1 text-grey-800;
+            }
+          }
+  
+          .boost-pfs-filter-option-content {
+            @apply px-0 pt-1 pb-6;
+  
+            .boost-pfs-filter-option-content-inner {
+              @apply m-0;
+            }
+  
+            .boost-pfs-filter-option-item-list {
+              @apply m-0 p-0;
+  
+              .boost-pfs-filter-option-item {
+                @apply mt-3 mb-0 p-0;
+              }
+  
+              &.boost-pfs-filter-option-item-list-single-list {
+                .boost-pfs-filter-option-item {
+                  @apply pl-7 border-l-2 border-solid border-transparent;
+  
+                  &.selected {
+                    @apply border-primary;
+  
+                    .boost-pfs-filter-button {
+                      @apply text-primary;
+                    }
+                  }
+                }
+              }
+  
+              &.boost-pfs-filter-option-item-list-multiple-list {
+                @apply pl-6;
+
+                .boost-pfs-filter-option-item {
+                  @apply pl-8;
+  
+                  .boost-pfs-check-box {
+                    @apply border border-solid border-grey-100 w-6 h-6 left-0 top-1/2 -translate-y-1/2;
+                  }
+  
+                  &.selected {
+                    .boost-pfs-check-box {
+                      @apply border-grey-800 bg-grey-800;
+  
+                      &:before {
+                        @apply absolute w-auto h-auto border-0 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 text-white;
+                        content: url('data:image/svg+xml; utf8, <svg width="14" height="10" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.8033 9.23528L14.2886 0.75L15.3492 1.81066L5.8033 11.3566L0.5 6.0533L1.56066 4.99264L5.8033 9.23528Z" fill="white"/></svg>');
+                      }
+                    }
+                  }
+                }
+              }
+
+              &.boost-pfs-filter-option-item-list-swatch {
+                @apply pt-4 pl-6 -mx-1;
+
+                .boost-pfs-filter-option-item {
+                  @apply mx-1 my-2;
+                }
+
+                .boost-pfs-filter-option-swatch-image {
+                  @apply border border-solid border-grey-300;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .boost-pfs-filter-mobile-footer {
+        width: calc(100% - 72px);
+
+        .boost-pfs-filter-show-result {
+          @apply flex items-center justify-center w-full h-[45px] p-2 border border-solid border-black bg-black text-white text-p-s uppercase font-bold;
+        }
+      }
+    }
+  }
+}
+
+.boost-pfs-filter-search-header-container {
+  .boost-pfs-filter-collection-header-wrapper {
+    @apply py-6 md:py-[62px] bg-[#F1F1F1];
+
+    .boost-pfs-search-result-header {
+      @apply text-left md:text-center text-h2-m md:text-h2 text-black font-oswald font-bold uppercase;
+    }
+  
+    .boost-pfs-search-form {
+      @apply !hidden max-w-[384px] mt-6 mb-0;
+  
+      .boost-pfs-search-box {
+        @apply p-3.5 pr-[28px] text-p text-grey-800 tracking-[0.3px] rounded-none border border-grey-100 hover:border-grey-300 active:border-grey-700 placeholder:text-grey-700;
+
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+          -webkit-appearance:none;
+        }
+      }
+
+      .boost-pfs-search-form-btn-clear {
+        @apply right-14 top-1/2 -translate-y-1/2;
+      }
+  
+      .boost-pfs-search-btn {
+        @apply flex items-center justify-center absolute right-3.5 top-1/2 -translate-y-1/2 min-w-0 w-6 h-6 bg-transparent min-w-0 bg-transparent rounded-none;
+  
+        &:before {
+          @apply hidden;
+          content: none;
+        }
+  
+        &:after {
+          @apply block leading-none w-4 h-4;
+          content: url('data:image/svg+xml; utf8, <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.114746 8.40267C0.114746 4.28917 3.48764 0.954529 7.64831 0.954529C11.809 0.954529 15.1819 4.28917 15.1819 8.40267C15.1819 12.5162 11.809 15.8508 7.64831 15.8508C3.48764 15.8508 0.114746 12.5162 0.114746 8.40267ZM13.7444 8.40267C13.7444 5.07408 11.0151 2.37573 7.64831 2.37573C4.28155 2.37573 1.55225 5.07408 1.55225 8.40267C1.55225 11.7313 4.28155 14.4296 7.64831 14.4296C11.0151 14.4296 13.7444 11.7313 13.7444 8.40267Z" fill="%23323332"/><path d="M11.4448 13.1611L12.4613 12.1561L17.1833 16.8246L16.1668 17.8295L11.4448 13.1611Z" fill="%23323332"/></svg>');
+        }
+      }
+    }
+  }
+}
+
+.boost-pfs-search-result-toolbar-container {
+  @apply mb-9;
+
+  .boost-pfs-search-result-toolbar {
+    @apply border-0 py-0;
+  }
+
+  .boost-pfs-filter-default-toolbar-inner {
+    @apply p-0 min-h-0;
+    
+    .boost-pfs-search-result-item {
+      @apply overflow-auto;
+
+      .boost-pfs-search-result-panel-controls {
+        @apply flex w-full m-0 !important;
+      }
+
+      .boost-pfs-search-result-panel-item  {
+        @apply max-w-none m-0 px-0 py-4 md:py-5 border-b-4 border-transparent ml-10 md:ml-[76px];
+
+        &:first-child {
+          @apply ml-0;
+        }
+
+        button {
+          @apply text-p-s md:text-p text-grey-600 font-bold tracking-[3px] uppercase whitespace-nowrap;
+        }
+
+        &.boost-active {
+          @apply border-primary;
+
+          button {
+            @apply text-black;
+          }
+        }
+      }
+
+      .boost-pfs-search-total-result {
+        @apply text-p-s font-medium tracking-[0.5px] text-black capitalize;
+
+        strong {
+          @apply font-medium;
+        }
+      }
+    }
+  }
+}
+
+.boost-pfs-search-result-wrap {
+  @apply !p-0;
+
+  .boost-pfs-search-result-collections {
+    @apply max-w-none p-0 m-0;
+
+    .boost-pfs-search-result-list-item {
+      @apply py-3 border-0;
+    }
+
+    .boost-pfs-search-result-list-item-title {
+      @apply text-p-s md:text-p tracking-[0.3px] font-normal;
+
+      &:hover {
+        @apply font-bold;
+      }
+    }
+  }
+
+  .boost-pfs-search-result-pages {
+    @apply max-w-none p-0 m-0;
+
+    .boost-pfs-search-result-list-item {
+      @apply py-6 md:py-8 border-b border-solid border-grey-200;
+
+      &:last-child {
+        @apply border-b border-solid border-grey-200;
+      }
+
+      .boost-pfs-search-result-list-item-image {
+        @apply aspect-[3/2] md:aspect-square relative w-full md:w-[200px] max-w-none md:max-w-[200px] mr-0 md:mr-10 mb-3 md:mb-0;
+
+        img {
+          @apply absolute top-0 left-0 w-full h-full object-cover;
+        }
+      }
+
+      > a {
+        @apply flex-col md:flex-row items-start md:items-center;
+
+        &:after {
+          @apply hidden md:flex items-center justify-center leading-none w-10 h-10;
+          content: url('data:image/svg+xml; utf8, <svg width="11" height="19" viewBox="0 0 11 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.575684 2.04932L2.29926 0.325743L10.4243 8.45074C10.8569 8.88343 10.8963 9.5605 10.5423 10.0376L10.4243 10.1743L2.29926 18.2993L0.575684 16.5757L7.83835 9.31253L0.575684 2.04932Z" fill="black"/></svg>');
+        }
+      }
+
+      .boost-pfs-search-result-list-item-title {
+        @apply text-p-s md:text-p tracking-[0.3px] font-normal;
+
+        &:hover {
+          @apply font-bold;
+        }
+      }
+    }
+  }
+}
+.boost-pfs-search-suggestion-wrapper {
+  .boost-pfs-search-suggestion-product-price {
+    .boost-pfs-search-suggestion-product-sale-price {
+      @apply text-error;
+    }
+  }
+}

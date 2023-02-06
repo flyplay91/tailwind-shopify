@@ -1,0 +1,119 @@
+{%-liquid
+  assign title = section.settings.title
+  assign description = section.settings.description
+  assign cta_label = section.settings.cta_label
+  assign cta_link = section.settings.cta_link
+  assign accordions = section.blocks
+-%}
+
+<div class="ccontain py-8 lg:py-16">
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-6">
+    <div class="lg:col-span-2">
+      {%- if title != blank -%}
+        <h2>{{ title }}</h2>
+      {%- endif -%}
+
+      {%- if description != blank -%}
+        <div class="mt-4 lg:mt-6">{{ description }}</div>
+      {%- endif -%}
+
+      {%- if cta_label != blank and cta_link != blank -%}
+        <a href="{{ cta_link }}" class="inline-block content-link mt-4 lg:mt-8">{{ cta_label }}</a>
+      {%- endif -%}
+    </div>
+    <div class="lg:col-span-3">
+      <div class="border-t border-solid border-grey-100" data-accordions>
+        {%- for accordion in accordions -%}
+          <div class="border-b border-solid border-grey-100" data-accordion-container>
+            <div class="flex items-center border-l-4 border-transparent px-7 py-5 lg:py-3.5 font-semibold cursor-pointer" data-accordion-heading>
+              <span class="flex-1">{{ accordion.settings.heading }}</span>
+              <span class="ml-4" data-accordion-icon>
+                {%- render 'icon-chevron-down', fill: '#000000' -%}
+              </span>
+            </div>
+            <div data-accordion-body>
+              <div class="px-8 pt-2 lg:pt-1 pb-4 lg:pb-6">
+                {{ accordion.settings.body }}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+
+{% schema %}
+
+{
+  "name": "Content Accordions",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    }, {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }, {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    }, {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA Label"
+    }, {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    }, {
+      "type": "header",
+      "content": "Spacing"
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "name": "accordion",
+      "type": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        }, {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Accordions"
+    }
+  ]
+}
+
+{% endschema %}

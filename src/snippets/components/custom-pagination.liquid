@@ -1,0 +1,45 @@
+{%- if paginate.pages > 1 -%}
+  <nav aria-label="Pagination" class="pagination text-center">
+    <ul class="list-none p-0 m-0 flex items-center justify-center">
+      <li class="flex p-0 mr-4 {% unless paginate.previous.is_link %} opacity-60 {% endunless %}">
+        {% if paginate.previous.is_link %}
+          <a href="{{ paginate.previous.url }}" class="inline-block p-2 prev mb-0">
+            {%- render 'icon-chevron-left', fill: '#000000' -%}
+          </a>
+        {% else %}
+          <span class="inline-block p-2 prev mb-0">
+            {%- render 'icon-chevron-left', fill: '#000000' -%}
+          </span>
+        {% endif %}
+      </li>
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <li class="p-0 mx-2">
+            <a href="{{ part.url }}" class="inline-block min-w-[12px] text-p-s font-bold text-black border-b-2 border-solid border-transparent" aria-label="Go to page {{ part.title }}">{{ part.title }}</a>
+          </li>
+        {% else %}
+          {% if part.title == '&hellip;' %}
+            <li class="p-0 mx-2">
+              <span class="inline-block min-w-[12px] text-p-s font-bold text-black border-b-2 border-solid border-transparent">...</span>
+            </li>
+          {% else %}
+            <li aria-current="true" aria-label="Page {{ part.title }}" class="p-0 mx-2">
+              <span class="inline-block min-w-[12px] text-p-s font-bold text-primary border-b-2 border-solid border-primary">{{ part.title }}</span>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      <li class="flex p-0 ml-4 {% unless paginate.next.is_link %}disabled{% endunless %}">
+        {% if paginate.next.is_link %}
+          <a href="{{ paginate.next.url }}" class="inline-block p-2 next mb-0">
+            {%- render 'icon-chevron-right', fill: '#000000' -%}
+          </a>
+        {% else %}
+          <span class="inline-block p-2 next mb-0">
+            {%- render 'icon-chevron-right', fill: '#000000' -%}
+          </span>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>
+{% endif %}

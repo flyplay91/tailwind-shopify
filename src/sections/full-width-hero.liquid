@@ -1,0 +1,235 @@
+{%- liquid
+  assign show = false
+  assign full_width = section.settings.full_width
+  assign section_max_height = section.settings.section_max_height | append: 'px'
+  assign heading = section.settings.heading
+  assign subheading = section.settings.sub_heading
+  assign description = section.settings.description
+  assign hero_image = section.settings.hero_image
+  assign hero_image_mobile = section.settings.hero_image_mobile | default: hero_image
+  assign hero_video = section.settings.hero_video
+  assign use_video = section.settings.use_video
+  assign content_alignment = section.settings.content_alignment
+  assign inner_content_alignment = section.settings.inner_content_alignment
+  assign text_alignment = 'text-left'
+  assign background_type = section.settings.background_type
+  assign background_fit = section.settings.background_fit
+  assign opacity_value = section.settings.opacity_value
+
+  if heading != blank and hero_image != blank
+    assign show = true
+  endif
+
+  if inner_content_alignment == 'center'
+    assign text_alignment = 'text-center'
+  endif
+-%}
+
+{%- if show -%}
+  {%- render 'page-full-width-hero' full_width: full_width, section_max_height: section_max_height, heading: heading, subheading: subheading, description: description, hero_image: hero_image, hero_image_mobile: hero_image_mobile, hero_video: hero_video, use_video: use_video, content_alignment: content_alignment, inner_content_alignment: inner_content_alignment, text_alignment: text_alignment, background_type: background_type, background_fit: background_fit, opacity_value: opacity_value, link_blocks: section.blocks -%}
+
+  {%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+{%- endif -%}
+
+{% schema %}
+
+{
+  "name": "Full Width Hero",
+  "tag": "section",
+  "class": "full-width-hero__conatiner",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "id": "full_width",
+      "label": "Full Width",
+      "type": "checkbox",
+      "info": "Check this box to enable the hero section to stretch full-width.",
+      "default": true
+    }, {
+      "id": "section_max_height",
+      "label": "Section Max Height",
+      "type": "range",
+      "min": 350,
+      "max": 800,
+      "step": 50,
+      "default": 650,
+      "info": "Slider used to set the max height of this section in pixels."
+    }, {
+      "id": "hero_image",
+      "label": "Hero Image",
+      "type": "image_picker"
+    }, {
+      "id": "hero_image_mobile",
+      "label": "Mobile Hero Image",
+      "type": "image_picker"
+    }, {
+      "id": "hero_video",
+      "label": "Hero Video",
+      "type": "text"
+    }, {
+      "id": "use_video",
+      "label": "Use Video",
+      "type": "checkbox",
+      "default": false
+    }, {
+      "id": "heading",
+      "label": "Hero Heading",
+      "type": "text"
+    }, {
+      "id": "sub_heading",
+      "label": "Hero Subheading",
+      "type": "text"
+    }, {
+      "id": "description",
+      "label": "Hero Description",
+      "type": "richtext"
+    }, {
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "type": "select",
+      "options": [
+        {
+          "value": "baseline",
+          "label": "Left"
+        }, {
+          "value": "center",
+          "label": "Center"
+        }, {
+          "value": "end",
+          "label": "Right"
+        }
+      ]
+    }, {
+      "id": "inner_content_alignment",
+      "label": "Inner Content Alignment",
+      "type": "select",
+      "options": [
+        {
+          "value": "baseline",
+          "label": "Left"
+        }, {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    }, {
+      "id": "background_type",
+      "label": "Background Type",
+      "type": "select",
+      "info": "Sets the background scheme - white, black, semi-transparent, or off/none.",
+      "options": [
+        {
+          "value": "off",
+          "label": "Off"
+        }, {
+          "value": "white",
+          "label": "White"
+        }, {
+          "value": "black",
+          "label": "Black"
+        }, {
+          "value": "semi_transparent",
+          "label": "Semi-Transparent"
+        }
+      ]
+    }, {
+      "id": "opacity_value",
+      "label": "Opacity Value",
+      "type": "range",
+      "min": 10,
+      "max": 90,
+      "step": 10,
+      "default": 50,
+      "info": "Slider used to control semi-transparent background opacity value."
+    }, {
+      "id": "background_fit",
+      "label": "Background Fit",
+      "type": "select",
+      "options": [
+        {
+          "value": "hug",
+          "label": "Hug"
+        }, {
+          "value": "full_height",
+          "label": "Full Height"
+        }
+      ]
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "name": "CTA Link",
+      "type": "link",
+      "settings": [
+        {
+          "id": "link_text",
+          "label": "Link Text",
+          "type": "text"
+        }, {
+          "id": "link_url",
+          "label": "Link Url",
+          "type": "url"
+        }, {
+          "id": "link_type",
+          "label": "Link Type",
+          "type": "select",
+          "info": "Select whether to render the link as a button or content link.",
+          "options": [
+            {
+              "value": "button",
+              "label": "Button"
+            }, {
+              "value": "link",
+              "label": "Content Link"
+            }
+          ]
+        }, {
+          "id": "button_scheme",
+          "label": "Button Scheme",
+          "type": "select",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            }, {
+              "value": "secondary",
+              "label": "Secondary"
+            }, {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full Width Hero"
+    }
+  ]
+}
+
+{% endschema %}

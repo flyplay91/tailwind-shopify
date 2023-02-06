@@ -1,0 +1,16 @@
+<form class="flex items-center relative lg:w-[256px]" action="{{ routes.search_url }}" method="get" role="search" data-search-form>
+  <label class="hidden" for="search-form">Search Keyword</label>
+  <input
+    type="text"
+    name="q"
+    id="search-form"
+    class="!p-0 lg:!px-3 lg:!py-4 !border-0 !min-w-0 w-full h-full absolute lg:static opacity-0 lg:opacity-100"
+    placeholder="Search Store"
+    value="{{ search.terms | escape }}"
+    autocomplete="off"
+    data-search-input
+  />
+  <button class="lg:absolute lg:top-1/2 lg:right-6 lg:transform lg:-translate-y-1/2">
+    {%- render 'icon-search' -%}
+  </button>
+</form>

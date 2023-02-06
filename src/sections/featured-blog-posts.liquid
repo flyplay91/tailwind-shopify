@@ -1,0 +1,65 @@
+{%- liquid
+  assign show = false
+  assign featured_blog = section.settings.featured_blog
+  assign title = section.settings.title
+  assign cta_text = section.settings.cta_text | default: "View All Blog Posts"
+
+  if featured_blog != blank and title != blank
+    assign show = true
+  endif
+-%}
+
+{%- if show -%}
+  {%- render 'featured-blog-posts' featured_blog: featured_blog, title: title, cta_text: cta_text -%}
+
+  {%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+{%- endif -%}
+
+{% schema %}
+
+{
+  "name": "Featured Blog Posts",
+  "class": "featured-blog-posts__container",
+  "tag": "section",
+  "settings": [
+    {
+      "id": "featured_blog",
+      "label": "Featured Blog",
+      "type": "blog"
+    }, {
+      "id": "title",
+      "label": "Title",
+      "type": "text"
+    }, {
+      "id": "cta_text",
+      "label": "CTA Text",
+      "type": "text",
+      "info": "Text that will populate the 'view all blog posts' button."
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Blog Posts"
+    }
+  ]
+}
+
+{% endschema %}

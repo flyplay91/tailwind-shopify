@@ -1,0 +1,169 @@
+{%- liquid
+  assign show = product.metafields["custom_fields"]["product_12_up_show"] | default: false
+  assign show_type = product.metafields["custom_fields"]["product_12_up_show_type"]
+  assign title = product.metafields["custom_fields"]["product_12_up_title"]
+  assign cta_one_media = product.metafields["custom_fields"]["product_12_up_one_media"]
+  assign cta_one_video = product.metafields["custom_fields"]["product_12_up_one_video_embed"]
+  assign cta_one_header = product.metafields["custom_fields"]["product_12_up_one_header"]
+  assign cta_one_subheader = product.metafields["custom_fields"]["product_12_up_one_subheader"]
+  assign cta_one_button_text = product.metafields["custom_fields"]["product_12_up_one_button_text"] | default: 'Shop Now'
+  assign cta_one_url = product.metafields["custom_fields"]["product_12_up_one_url"]
+  assign cta_one_alt_image = product.metafields["custom_fields"]["product_12_up_one_alt_image"]
+  assign cta_two_media = product.metafields["custom_fields"]["product_12_up_two_media"]
+  assign cta_two_video = product.metafields["custom_fields"]["product_12_up_two_video_embed"]
+  assign cta_two_header = product.metafields["custom_fields"]["product_12_up_two_header"]
+  assign cta_two_subheader = product.metafields["custom_fields"]["product_12_up_two_subheader"]
+  assign cta_two_button_text = product.metafields["custom_fields"]["product_12_up_two_button_text"] | default: 'Shop Now'
+  assign cta_two_url = product.metafields["custom_fields"]["product_12_up_two_url"]
+
+  assign type = show_type | downcase | default: 'one'
+
+  if type == 'one'
+    if cta_one_media == blank
+      assign show = false
+    endif
+  elsif type == 'lifestyle'
+    if cta_one_media == blank and cta_one_alt_image == blank
+      assign show = false
+    endif
+  else
+    if cta_one_media == blank and cta_two_media == blank
+      assign show = false
+    endif
+  endif
+-%}
+
+{%- if show -%}
+  <section class="product-1-2-up__container ccontain mb-10">
+    {%- if type == 'one' -%}
+      <h2 class="h2 mb-4 pl-6 md:pl-28">{{ title }}</h2>
+      <div class="w-full min-h-[525px]">
+        <div class="cta_one">
+          <div class="aspect-[4/5] relative md:w-full md:h-[850px]">
+            {%- if cta_one_video != blank -%}
+              <video autoplay class="video-one h-full w-full m-0 object-cover lg:aspect-video" loop muted playsinline>
+                <source src="{{ cta_one_video }}">
+              </video>
+              <div class="play-pause-one playing absolute top-4 right-4 z-10 cursor-pointer">
+                <svg class="pause-btn" fill="none" height="30" viewbox="0 0 14 19" width="35" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.74275 0H0V19H4.74275V0Z" fill="white"/>
+                  <path d="M13.9996 0H9.25684V19H13.9996V0Z" fill="white"/>
+                </svg>
+              </div>
+            {%- else -%}
+              <img loading="lazy" class="w-full h-full object-cover" src="{{ cta_one_media | img_url: 'large'}}" alt="{{ cta_one_header }}">
+            {%- endif -%}
+            <div class="cta-content__container flex flex-col absolute bottom-0 left-0 w-full h-auto p-6" style="background: rgba(0, 0, 0, .4);">
+              {%- if cta_one_subheader -%}
+                <h5 class="mb-4 text-white sub-s caps">{{ cta_one_subheader }}</h5>
+              {%- endif -%}
+              <h4 class="text-white h4">{{ cta_one_header }}</h4>
+              <a href="{{ cta_one_url }}" target="_blank">
+                <button class="mt-4 button button--primary">
+                  {{ cta_one_button_text }}
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- elsif type == 'lifestyle' -%}
+      <h2 class="h2 mb-4 pl-6 md:pl-28">{{ title }}</h2>
+      <div class="w-full h-full min-h-[525px] grid md:grid-cols-2 md:items-center md:justify-center">
+        <div class="cta_one h-full">
+          <div class="relative h-full">
+            {%- if cta_one_video != blank -%}
+              <video autoplay class="video-one h-full w-full m-0 object-cover" loop muted playsinline>
+                <source src="{{ cta_one_video }}">
+              </video>
+              <div class="play-pause-one playing absolute top-4 right-4 z-10 cursor-pointer">
+                <svg class="pause-btn" fill="none" height="30" viewbox="0 0 14 19" width="35" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.74275 0H0V19H4.74275V0Z" fill="white"/>
+                  <path d="M13.9996 0H9.25684V19H13.9996V0Z" fill="white"/>
+                </svg>
+              </div>
+            {%- else -%}
+              <img loading="lazy" class="w-full h-full object-cover" src="{{ cta_one_media | img_url: 'large'}}" alt="{{ cta_one_header }}">
+            {%- endif -%}
+            <div class="cta-content__container flex flex-col absolute bottom-0 left-0 w-full h-auto p-6" style="background: rgba(0, 0, 0, .4);">
+              {%- if cta_one_subheader -%}
+                <h5 class="mb-4 text-white sub-s caps">{{ cta_one_subheader }}</h5>
+              {%- endif -%}
+              <h4 class="text-white h4">{{ cta_one_header }}</h4>
+              <a href="{{ cta_one_url }}" target="_blank">
+                <button class="mt-4 button button--primary">
+                  {{ cta_one_button_text }}
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="lifestyle-image hidden md:block md:p-14 w-full h-full">
+          <img loading="lazy" class="w-full h-full object-cover" src="{{ cta_one_alt_image | img_url: 'large' }}" alt="{{ cta_one_header }} Alternate">
+        </div>
+      </div>
+    {%- else -%}
+      <div class="w-full h-full min-h-[525px] grid grid-rows-2 gap-6 xl:gap-24 md:grid-rows-1 md:grid-cols-2 md:items-center md:justify-center">
+        <div class="h-full w-full pt-7 flex flex-col">
+          <h2 class="h2 mb-4 pl-6 md:pl-0">{{ title }}</h2>
+          <div class="cta_one h-[490px] md:h-full md:min-h-[490px]">
+            <div class="relative h-full">
+              {%- if cta_one_video != blank -%}
+                <video autoplay class="video-one h-full w-full m-0 object-cover" loop muted playsinline>
+                  <source src="{{ cta_one_video }}">
+                </video>
+                <div class="play-pause-one playing absolute top-4 right-4 z-10 cursor-pointer flex flex-row items-center justify-center">
+                  <svg class="pause-btn" fill="none" height="30" viewbox="0 0 14 19" width="35" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.74275 0H0V19H4.74275V0Z" fill="white"/>
+                    <path d="M13.9996 0H9.25684V19H13.9996V0Z" fill="white"/>
+                  </svg>
+                </div>
+              {%- else -%}
+                <img loading="lazy" class="w-full h-full object-cover" src="{{ cta_one_media | img_url: 'large'}}" alt="{{ cta_one_header }}">
+              {%- endif -%}
+              <div class="cta-content__container flex flex-col absolute bottom-0 left-0 w-full h-auto p-6" style="background: rgba(0, 0, 0, .4);">
+                {%- if cta_one_subheader -%}
+                  <h5 class="mb-4 text-white sub-s caps">{{ cta_one_subheader }}</h5>
+                {%- endif -%}
+                <h4 class="text-white h4">{{ cta_one_header }}</h4>
+                <a href="{{ cta_one_url }}" target="_blank">
+                  <button class="mt-4 button button--primary">
+                    {{ cta_one_button_text }}
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cta_two md:pb-24 h-[490px] md:h-full md:min-h-[490px]">
+          <div class="relative h-full">
+            {%- if cta_two_video != blank -%}
+              <video autoplay class="video-two h-full w-full m-0 object-cover" loop muted playsinline>
+                <source src="{{ cta_two_video }}">
+              </video>
+              <div class="play-pause-two playing absolute top-4 right-4 z-10 cursor-pointer flex flex-row items-center justify-center">
+                <svg class="pause-btn" fill="none" height="30" viewbox="0 0 14 19" width="35" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.74275 0H0V19H4.74275V0Z" fill="white"/>
+                  <path d="M13.9996 0H9.25684V19H13.9996V0Z" fill="white"/>
+                </svg>
+              </div>
+            {%- else -%}
+              <img loading="lazy" class="w-full h-full object-cover" src="{{ cta_two_media | img_url: 'large'}}" alt="{{ cta_two_header }}">
+            {%- endif -%}
+            <div class="cta-content__container flex flex-col absolute bottom-0 left-0 w-full h-auto p-6" style="background: rgba(0, 0, 0, .4);">
+              {%- if cta_two_subheader -%}
+                <h5 class="mb-4 text-white sub-s caps">{{ cta_two_subheader }}</h5>
+              {%- endif -%}
+              <h4 class="text-white h4">{{ cta_two_header }}</h4>
+              <a href="{{ cta_two_url }}" target="_blank">
+                <button class="mt-4 button button--primary">
+                  {{ cta_two_button_text }}
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </section>
+{%- endif -%}

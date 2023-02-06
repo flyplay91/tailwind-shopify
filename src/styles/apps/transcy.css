@@ -1,0 +1,5 @@
+body {
+    span#transcyBtnSwitcher {
+    @apply lg:!bg-transparent lg:!py-0 !min-h-0;
+  }
+}

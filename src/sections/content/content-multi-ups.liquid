@@ -1,0 +1,297 @@
+{%-liquid
+  assign heading = section.settings.heading
+  assign autoplay_video = section.settings.autoplay_video
+  assign overlay_color = section.settings.overlay_color
+  assign overlay_transparency = section.settings.overlay_transparency
+  assign bottom_padding_desktop = section.settings.bottom_padding_desktop
+  assign bottom_padding_mobile = section.settings.bottom_padding_mobile
+  assign max_height = section.settings.max_height
+  assign blocks = section.blocks
+  assign ups = blocks.size
+  assign container_class = "gird grid-cols-1"
+  assign block_aspect = "aspect-[3/4] lg:aspect-[4/3]"
+  assign video_controls_class = "top-6 right-6"
+
+  if ups == 2
+    assign container_class = "grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-[92px]"
+    assign block_aspect = "aspect-[3/4]"
+  elsif ups == 3
+    assign container_class = "grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-6"
+    assign block_aspect = "aspect-[3/4]"
+    assign video_controls_class = "top-6 lg:top-4 right-6 lg:right-4"
+  endif
+-%}
+
+<div class="ccontain" data-section-id="{{ section.id }}">
+  <style>
+    [data-section-id="{{ section.id }}"] [data-content-up-block-item] {
+      max-height: {{ max_height }}px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      [data-section-id="{{ section.id }}"] [data-content-up-block-item] {
+        max-height: none;
+      }
+    }
+  </style>
+  {%- unless ups == 2 or heading == blank -%}
+    <h2 class="mb-8 {% if ups == 3 %} text-center {% endif %}">{{ heading }}</h2>
+  {%- endunless -%}
+
+  <div class="{{ container_class }} -mx-6 lg:mx-0">
+    {%- for block in blocks -%}
+      {%-liquid
+        assign video = block.settings.video
+        assign image_desktop = block.settings.image
+        assign image_mobile = block.settings.image_mobile | default: image_desktop
+        assign lifestyle_image = block.settings.lifestyle_image
+        assign title = block.settings.title
+        assign subtitle = block.settings.subtitle
+        assign description = block.settings.description
+        assign cta_label = block.settings.cta_label
+        assign cta_link = block.settings.cta_link
+        assign cta_style = block.settings.cta_style
+
+        if ups == 1 and lifestyle_image
+          assign block_aspect = "aspect-[3/4]"
+        endif
+      -%}
+      <div class="{% if ups == 1 and lifestyle_image %} lg:grid lg:grid-cols-7 gap-14 items-center {% endif %}">
+        {%- if ups == 2 and heading != blank and forloop.first -%}
+          <h2 class="mb-8">{{ heading }}</h2>
+        {%- endif -%}
+
+        <div class="relative group col-span-4" data-content-up-block>
+          {%- if cta_link != blank -%}
+            <a href="{{ cta_link }}">
+            {%- endif -%}
+            <div class="w-full {{ block_aspect }}" data-content-up-block-item data-content-up-media>
+              {%- if video -%}
+                {{- video | video_tag: autoplay: autoplay_video, loop: true -}}
+              {%- elsif block.settings.image -%}
+                <img src="{{ image_desktop | image_url }}" class="w-full h-full object-cover" loading="lazy">
+              {%- endif -%}
+            </div>
+
+            <div class="absolute left-0 top-0 w-full h-full {{ overlay_color }}" style="--tw-bg-opacity: {{ overlay_transparency | divided_by: 100.00 }}"></div>
+
+            <div class="absolute left-0 bottom-0 w-full">
+              <div class="{% if ups > 2 %} p-6 {% else %} p-10 {% endif %}">
+                {%- if subtitle != blank -%}
+                  <div class="sub-s caps text-white mb-4">{{ subtitle }}</div>
+                {%- endif -%}
+
+                {%- if title != blank -%}
+                  <h3 class="text-white">{{ title }}</h3>
+                {%- endif -%}
+
+                {%- if description != blank -%}
+                  <div class="text-white mt-4 lg:hidden group-hover:lg:block">{{ description }}</div>
+                {%- endif -%}
+
+                {%- if cta_label != blank and cta_link != blank -%}
+                  {%- if cta_style == 'content-link' -%}
+                    <div class="mt-6">
+                      <span class="content-link !text-white">{{ cta_label }}</span>
+                    </div>
+                  {%- else -%}
+                    <button class="button {{ cta_style }} mt-6">{{ cta_label }}</button>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+            </div>
+
+            {%- if video -%}
+              <div class="absolute {{ video_controls_class }}" data-content-video-controls>
+                <button data-content-video-play>
+                  {%- render 'icon-video-play' -%}
+                </button>
+                <button data-content-video-pause>
+                  {%- render 'icon-video-pause' -%}
+                </button>
+              </div>
+            {%- endif -%}
+            {%- if cta_link != blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if ups == 1 and lifestyle_image -%}
+          <div class="hidden lg:block col-span-3">
+            <div class="aspect-[3/4]" data-content-up-block-item>
+              <img src="{{ lifestyle_image | image_url }}" loading="lazy" class="w-full h-full object-cover">
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+
+{% schema %}
+
+{
+  "name": "Content Multi Ups",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    }, {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    }, {
+      "type": "checkbox",
+      "id": "autoplay_video",
+      "label": "Autoplay Video",
+      "default": true
+    }, {
+      "type": "header",
+      "content": "Appearance"
+    }, {
+      "type": "select",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "options": [
+        {
+          "value": "bg-primary",
+          "label": "Primary"
+        }, {
+          "value": "bg-secondary",
+          "label": "Secondary"
+        }, {
+          "value": "bg-black",
+          "label": "Black"
+        }, {
+          "value": "bg-alternate",
+          "label": "Alternate"
+        }, {
+          "value": "bg-grey-800",
+          "label": "Grey"
+        }
+      ],
+      "default": "bg-black"
+    }, {
+      "type": "range",
+      "id": "overlay_transparency",
+      "label": "Overlay Transparency",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    }, {
+      "type": "header",
+      "content": "Spacing"
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }, {
+      "id": "max_height",
+      "label": "Max Height - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 1000,
+      "step": 50,
+      "default": 1000
+    }
+  ],
+  "blocks": [
+    {
+      "name": "block",
+      "type": "Block",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image & Video"
+        }, {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        }, {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (Desktop)"
+        }, {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image (Mobile)"
+        }, {
+          "type": "image_picker",
+          "id": "lifestyle_image",
+          "label": "Lifestyle Image"
+        }, {
+          "type": "header",
+          "content": "Text Content"
+        }, {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }, {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        }, {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }, {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA Label"
+        }, {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA Link"
+        }, {
+          "type": "select",
+          "id": "cta_style",
+          "label": "CTA Style",
+          "options": [
+            {
+              "value": "content-link",
+              "label": "Content Link"
+            }, {
+              "value": "button--primary",
+              "label": "Primary"
+            }, {
+              "value": "button--secondary",
+              "label": "Secondary"
+            }, {
+              "value": "button--tertiary",
+              "label": "Tertiary"
+            }, {
+              "value": "button--outline",
+              "label": "Outline"
+            }
+          ],
+          "default": "button--primary"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Multi Ups"
+    }
+  ]
+}
+
+{% endschema %}

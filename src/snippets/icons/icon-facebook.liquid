@@ -1,0 +1,10 @@
+{%-liquid
+  assign width = width | default: 8
+  assign height = height | default: 13
+  assign fill = fill | default: "#FFFFFF"
+-%}
+
+<svg width="{{ width }}" height="{{ height }}" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2.44448 12.6626V6.9589H0.888916V4.88482H2.44448V3.07C2.44448 1.60086 3.36629 0.21814 5.55559 0.21814C6.4342 0.21814 7.11115 0.333366 7.11115 0.333366L7.02473 2.29222H5.68523C4.89304 2.29222 4.77782 2.72432 4.77782 3.32926V4.88482H7.11115L6.95272 6.9589H4.77782V12.6626H2.44448Z" fill="{{ fill }}"/>
+</svg>
+  

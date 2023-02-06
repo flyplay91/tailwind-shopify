@@ -1,0 +1,160 @@
+{%- liquid
+  assign show = section.settings.show_section
+  assign image = section.settings.section_image
+  assign image_alignment = section.settings.image_alignment
+  assign image_aspect_ratio = section.settings.image_aspect_ratio
+  assign content_alignment = section.settings.content_alignment
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign description = section.settings.description
+  assign link_type = section.settings.link_type
+  assign link_text = section.settings.link_text
+  assign button_color = section.settings.button_color
+  assign link_url = section.settings.link_url
+  assign background = section.settings.background
+-%}
+
+{%- render '5050-reversible' show: show, image: image, image_alignment: image_alignment, image_aspect_ratio: image_aspect_ratio, content_alignment: content_alignment, heading: heading, subheading: subheading, description: description, link_type: link_type, link_text: link_text, button_color: button_color, link_url: link_url, background: background -%}
+
+{%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+
+{% schema %}
+
+{
+  "name": "Reversible 50/50",
+  "tag": "section",
+  "settings": [
+    {
+      "id": "show_section",
+      "label": "Show Section",
+      "type": "checkbox",
+      "default": false
+    }, {
+      "id": "section_image",
+      "label": "Section Image",
+      "type": "image_picker"
+    }, {
+      "id": "image_alignment",
+      "label": "Image Alignment",
+      "type": "select",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        }, {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }, {
+      "id": "image_aspect_ratio",
+      "label": "Image Aspect Ratio",
+      "type": "select",
+      "info": "Note: this setting will affect MOBILE viewports only.",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        }, {
+          "value": "4/5",
+          "label": "4:5"
+        }
+      ],
+      "default": "square"
+    }, {
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "type": "select",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        }, {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    }, {
+      "id": "heading",
+      "label": "Section Heading",
+      "type": "text"
+    }, {
+      "id": "subheading",
+      "label": "Section Subheading",
+      "type": "text"
+    }, {
+      "id": "description",
+      "label": "Section Description",
+      "type": "richtext"
+    }, {
+      "id": "link_type",
+      "label": "Link Type",
+      "type": "select",
+      "options": [
+        {
+          "value": "button",
+          "label": "Button"
+        }, {
+          "value": "inline_link",
+          "label": "Inline Link"
+        }
+      ]
+    }, {
+      "id": "link_text",
+      "label": "Link Text",
+      "type": "text",
+      "default": "Shop Now"
+    }, {
+      "id": "button_color",
+      "label": "Button Color",
+      "type": "select",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        }, {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ],
+      "info": "Selects the color scheme when 'Button' is chosen as the link type."
+    }, {
+      "id": "link_url",
+      "label": "Link Url",
+      "type": "url"
+    }, {
+      "id": "background",
+      "label": "Background",
+      "type": "checkbox",
+      "default": false,
+      "info": "If selected, grey background will render behind section content."
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reversible 50/50"
+    }
+  ]
+}
+
+{% endschema %}

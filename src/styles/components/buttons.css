@@ -1,0 +1,83 @@
+.button, .button--outline, .button--primary, .button--secondary, .button--tertiary, .button--small {
+  @apply font-roboto-condensed;
+}
+
+.button {
+  @apply min-w-[105px] py-3 px-6 text-p-s leading-6 tracking-[1px] font-bold uppercase transition duration-200;
+
+  &.button--small {
+    @apply py-[5.5px];
+  }
+}
+
+.button--primary {
+  @apply text-white bg-primary hover:bg-black;
+
+  &.button--small {
+    @apply py-[5.5px];
+
+    &:disabled {
+      @apply bg-grey-100 cursor-not-allowed text-grey-700;
+    }
+  }
+
+  &:disabled {
+    @apply bg-grey-100 cursor-not-allowed text-grey-700;
+  }
+}
+
+.button--secondary {
+  @apply text-white bg-black hover:bg-grey-700;
+
+  &.button--small {
+    @apply py-[5.5px];
+
+    &:disabled {
+      @apply bg-grey-100 cursor-not-allowed text-grey-700;
+    }
+  }
+
+  &:disabled {
+    @apply bg-grey-100 cursor-not-allowed text-grey-700;
+  }
+}
+
+.button--tertiary {
+  @apply text-black border border-black hover:bg-black;
+
+  &.button--small {
+    @apply py-[5.5px];
+
+    &:disabled {
+      @apply bg-grey-100 cursor-not-allowed border-none text-grey-700;
+    }
+  }
+
+  &:disabled {
+    @apply bg-grey-100 cursor-not-allowed border-none text-grey-700;
+  }
+
+  &:not(:disabled) {
+    @apply hover:text-white;
+  }
+}
+
+.button--outline {
+  @apply text-white border border-white hover:bg-white;
+
+  &.button--small {
+    @apply py-[5.5px];
+
+    &:disabled {
+      @apply bg-grey-100 cursor-not-allowed text-grey-700;
+    }
+  }
+
+  &:disabled {
+    @apply bg-grey-100 cursor-not-allowed text-grey-700;
+  }
+
+  &:not(:disabled) {
+    @apply hover:text-black
+  }
+}

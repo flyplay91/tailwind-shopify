@@ -1,0 +1,169 @@
+{%-liquid
+  assign thisYear = 'now' | date: '%Y'
+  assign copyright = section.settings.copyright | replace: '[year]', thisYear
+  assign terms_menu = linklists[section.settings.terms_menu] | default: false
+  assign blocks = section.blocks
+  assign newsletter_block = false
+
+  for block in blocks
+    if block.type == 'footer_newlsetter'
+      assign newsletter_block = block
+    endif
+  endfor
+-%}
+
+{%- if newsletter_block -%}
+  {%- capture email_signup_settings -%}
+    {
+        "title":
+    {{- newsletter_block.settings.email_signup_title | json -}},
+        "content":
+    {{- newsletter_block.settings.email_signup_content | json -}},
+        "successMessage":
+    {{- newsletter_block.settings.success_message | json -}},
+        "errorMessage":
+    {{- newsletter_block.settings.error_message | json -}},
+        "klaviyoListId":
+    {{- newsletter_block.settings.klaviyo_list_id | json -}}
+    }
+  {%- endcapture -%}
+  {%- assign email_signup_settings = email_signup_settings | replace: "'", "’" -%}
+{%- endif -%}
+
+<div class="bg-black">
+  <div class="ccontain">
+    <div class="-mx-6 md:mx-0 py-12 md:py-8">
+      <div class="hidden md:block">
+        {%- render 'logo-small' -%}
+      </div>
+      <div class="flex flex-col lg:flex-row md:pt-8 md:pb-3">
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-6 order-2 lg:order-1 mt-12 lg:mt-0">
+          {%- for block in blocks -%}
+            {%- unless block.type == 'footer_column_block' -%}
+              {%- break -%}
+            {%- endunless -%}
+            {%- assign block_menu = block.settings.menu -%}
+            <div class="px-6 md:px-0 py-4 md:py-0 border-b md:border-0 border-grey-300" data-footer-block>
+              <h6 class="flex items-center text-white cursor-pointer md:cursor-default" data-footer-block-header>
+                <span class="flex-1">{{ block.settings.heading }}</span>
+                <span class="md:hidden ml-4 transition-transform duration-300 ease-in-out" data-footer-block-icon>
+                  {%-render 'icon-chevron-down', fill: '#FFFFFF' -%}
+                </span>
+              </h6>
+              <ul class="hidden md:block list-none m-0 px-0 py-4 text-white group" data-footer-block-body>
+                {%- for link in block_menu.links -%}
+                  <li class="{% if forloop.first %} mt-0 {% else %} mt-6 md:mt-4 {% endif %} p-0">
+                    <a href="{{ link.url }}" class="text-p-s md:text-p text-grey-100 group-hover:opacity-[.65] hover:text-white group-hover:hover:opacity-100">{{ link.title }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="lg:max-w-[316px] lg:ml-16 order-1 lg:order-2 px-6 md:px-0">
+          {%- if newsletter_block -%}
+            <div id="EmailSignup" props='{{- email_signup_settings -}}'></div>
+          {%- endif -%}
+          <div class="hidden lg:block !mt-10">
+            {%- render 'footer-social-links' -%}
+          </div>
+        </div>
+      </div>
+      <div class="lg:hidden px-6 mt-12">
+        {%- render 'footer-social-links' -%}
+      </div>
+      <div class="flex items-center flex-wrap pt-8 md:pt-3 lg:border-t lg:border-grey-700 px-6 md:px-0">
+        <div class="flex-1 order-2 md:order-1 p-xs text-grey-300">
+          {{ copyright }}
+        </div>
+        {%- if terms_menu -%}
+          <ul class="order-1 md:order-2 list-none flex items-center justify-start md:justify-center w-full md:w-auto p-0 group -mx-2 md:mx-0">
+            {%- for link in terms_menu.links -%}
+              <li class="p-0 mx-2">
+                <a href="{{ link.url }}" class="p-xs text-grey-100 group-hover:opacity-[.65] hover:text-white group-hover:hover:opacity-100">{{ link.title }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+
+{
+  "name": "Site Footer",
+  "tag": "footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    }, {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright",
+      "default": "© TITLE Boxing [year]",
+      "info": "[year] will be replaced with current year"
+    }, {
+      "type": "link_list",
+      "id": "terms_menu",
+      "label": "Terms Menu"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Footer Column Block",
+      "type": "footer_column_block",
+      "limit": 4,
+      "settings": [
+        {
+          "id": "heading",
+          "type": "text",
+          "label": "Footer Column Heading"
+        }, {
+          "id": "menu",
+          "type": "link_list",
+          "label": "Footer Column Menu"
+        }
+      ]
+    }, {
+      "name": "Footer Newsletter",
+      "type": "footer_newlsetter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General"
+        }, {
+          "type": "text",
+          "id": "email_signup_title",
+          "label": "Email Signup Title",
+          "default": "Signup"
+        }, {
+          "type": "richtext",
+          "id": "email_signup_content",
+          "label": "Email Signup Content",
+          "default": "<p>Signup for our email list!</p>"
+        }, {
+          "type": "text",
+          "id": "success_message",
+          "label": "Email Signup Success Message",
+          "default": "You've signed up!"
+        }, {
+          "type": "text",
+          "id": "error_message",
+          "label": "Email Signup Error Message",
+          "default": "Oops, something went wrong!"
+        }, {
+          "type": "text",
+          "id": "klaviyo_list_id",
+          "label": "Klaviyo List Id"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

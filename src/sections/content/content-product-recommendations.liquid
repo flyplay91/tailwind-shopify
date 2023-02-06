@@ -1,0 +1,128 @@
+{%-liquid
+  assign heading = section.settings.heading
+  assign background_color = section.settings.background_color
+  assign bottom_padding_desktop = section.settings.bottom_padding_desktop
+  assign bottom_padding_mobile = section.settings.bottom_padding_mobile
+  assign collection_tabs = section.blocks
+-%}
+
+<div class="section section--{{ section.id }} {{ background_color }} overflow-hidden pt-12 lg:pt-16 mb-1" data-product-recs>
+  <div class="ccontain">
+    {%- if heading != blank -%}
+      <h2>{{ heading }}</h2>
+    {%- endif -%}
+
+    {%- if collection_tabs.size > 1 -%}
+      <div class="relative mt-0 mt-4 lg:-mt-4 overflow-auto lg:overflow-hidden -mr-6 lg:mr-0 pb-1.5">
+        <ul class="list-none flex items-center justify-start lg:justify-end lg:-mx-4 my-0 p-0 lg:border-b lg:border-grey-100">
+          {%- for tab in collection_tabs -%}
+            {%- assign tab_collection = collections[tab.settings.collection] -%}
+            {%- assign tab_title = tab.settings.title | default: tab_collection.title -%}
+
+            <li class="ml-0 p-0 pr-8 lg:px-4 whitespace-nowrap border-b border-grey-100 lg:border-b-0">
+              <a
+                href="#product-recs-tab-{{ tab.id }}"
+                class="inline-block border-b-[6px] lg:border-b-2 border-transparent py-2 lg:py-3 text-p-s font-roboto tracking-[0.5px] hover:text-primary {% if forloop.first %} active {% endif %}"
+                data-product-recs-tab-header
+              >
+                {{ tab_title }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    <div>
+      {%- for tab in collection_tabs -%}
+        {%- assign tab_collection = collections[tab.settings.collection] -%}
+        <div
+          id="product-recs-tab-{{ tab.id }}"
+          class="hidden py-4 lg:py-6 scrollbar snap-mandatory overflow-auto {% if forloop.first %} active {% endif %}"
+          data-product-recs-tab-body
+        >
+          {%- for product in tab_collection.products limit: 10 -%}
+            {%- render 'product-tile', product: product, class: 'w-[275px] lg:w-[362px] shrink-0 mr-2 lg:mr-6 bg-white' -%}
+          {%- endfor-%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+
+{% schema %}
+
+{
+  "name": "Content Product Recs",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    }, {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    }, {
+      "type": "select",
+      "id": "background_color",
+      "label": "Background Color",
+      "options": [
+        {
+          "value": "bg-white",
+          "label": "White"
+        }, {
+          "value": "bg-off-white",
+          "label": "Off White"
+        }
+      ],
+      "default": "bg-white"
+    }, {
+      "type": "header",
+      "content": "Spacing"
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "name": "colleciton",
+      "type": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }, {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Product Recs"
+    }
+  ]
+}
+
+{% endschema %}

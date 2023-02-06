@@ -1,0 +1,53 @@
+<div class="hidden" data-account-sign-in>
+  <div class="ccontain-large grid grid-cols-1 lg:grid-cols-2 gap-24">
+    <div class="hidden lg:block pr-10 -ml-6">
+      <div class="h-full relative">
+        <img src="{{ 'account-sign-in.jpg' | file_img_url: 'master' }}" class="absolute left-0 top-0 w-full h-full object-cover" loading="lazy" alt="Account Sign In" />
+      </div>
+    </div>
+    <div class="lg:px-10 pt-12">
+      <h1 class="text-h4 lg:text-h2">Sign In</h1>
+      <div class="border-t-[3px] border-primary mt-2 w-12"></div>
+      {%- form 'customer_login', class: 'form mt-6' -%}
+        {%- if form.errors -%}
+          <div class="form-error-message">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Email {%- endcomment -%}
+        <div class="flex flex-col">
+          <div class="input-wrap">
+            <label class="input-label" for="LoginForm-email">Email</label>
+            <input class="lg:max-w-[385px]" type="email" name="customer[email]" id="LoginForm-email" placeholder="Enter Email" required data-error-message="This input is required">
+            <div class="input-error-message" data-error-for="input-error">
+              {%- render 'alert' -%}
+              <span>This is a required field.</span>
+            </div>
+          </div>
+
+          <div class="input-wrap mt-6">
+            <label class="input-label" for="LoginForm-password">Password</label>
+            <input class="lg:max-w-[385px]" type="password" id="LoginForm-password" name="customer[password]" placeholder="Enter Password" required data-error-message="This input is required">
+            <div class="input-error-message" data-error-for="input-error">
+              {%- render 'alert' -%}
+              <span>This is a required field.</span>
+            </div>
+          </div>
+        </div>
+
+        {%- comment -%} Submit Sign In Form {%- endcomment -%}
+        <button class="button button--primary mt-6" type="submit">Sign-In</button>
+        <div class="mt-4">
+          <a class="text-sub-s" data-go-forgot href="#recover">Forgot your password?</a>
+        </div>
+      {%- endform -%}
+
+      <div class="!mt-10 -mx-6 lg:-ml-[176px] lg:-mr-16 lg:pl-[176px] bg-off-white py-10 px-6 lg:px-0">
+        <h5 class="font-oswald uppercase font-semibold">Don’t have an account? Create one now.</h5>
+        <p>Create an account to help keep track of your orders and more.</p>
+        <a href="{{ routes.account_register_url }}" class="inline-block button button--secondary mt-6">Create an account</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,241 @@
+{%-liquid
+  assign show_svg_logo = section.settings.show_svg_logo
+  assign logo = section.settings.logo
+  assign main_nav = section.settings.main_nav
+  assign main_nav_mobile = section.settings.main_nav_mobile | default: main_nav
+
+  assign gift_cards_link = section.settings.gift_cards_link
+  assign wholesale_link = section.settings.wholesale_link
+
+  assign mega_menu_blocks = section.blocks
+-%}
+
+<div class="bg-white relative">
+  <div class="border-b border-grey-200">
+    <div class="ccontain-xlarge xl:px-[112px]">
+      <div class="flex items-center justify-between">
+        <div class="lg:pr-6 py-6">
+          <a href="/" class="flex items-center w-[150px] md:w-auto">
+            {%- if show_svg_logo -%}
+              {%- render 'logo-primary' -%}
+            {%- else -%}
+              <img src="{{ logo | image_url: width: 150 }}" alt="Logo" />
+            {%- endif -%}
+          </a>
+        </div>
+        <div class="flex">
+          <div class="flex items-center py-6">
+            {%- render 'header-search' -%}
+          </div>
+          <div class="hidden lg:flex items-center ml-6 lg:ml-8 py-6">
+            <a href="{{ routes.account_url }}" title="Account" class="flex items-center">
+              {%- render 'icon-account' -%}
+            </a>
+          </div>
+          <div id="CartIcon"></div>
+          <div class="flex lg:hidden items-center ml-6 py-4">
+            <button class="flex items-center justify-center w-9 h-9" data-header-menu-toggler>
+              <span data-toggler-icon-inactive>
+                {%- render 'icon-hamburger' -%}
+              </span>
+              <span data-toggler-icon-active>
+                {%- render 'icon-close' -%}
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- render 'header-nav', nav: main_nav, blocks: mega_menu_blocks, gift_cards_link: gift_cards_link, wholesale_link: wholesale_link -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Site Header",
+    "tag": "header",
+    "class": "siteHeader",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_svg_logo",
+        "label": "Show SVG Logo",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "id": "main_nav",
+        "type": "link_list",
+        "label": "Main Navigation (Desktop)",
+        "default": "main-menu"
+      },
+      {
+        "id": "main_nav_mobile",
+        "type": "link_list",
+        "label": "Main Navigation (Mobile)",
+        "default": "main-menu",
+        "info": "If not set, desktop navigation will be used instead"
+      },
+      {
+        "type": "header",
+        "content": "Mobile Menu"
+      },
+      {
+        "type": "url",
+        "id": "gift_cards_link",
+        "label": "Gift Cards Link"
+      },
+      {
+        "type": "url",
+        "id": "wholesale_link",
+        "label": "Wholesale Link"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "CTA",
+        "type": "cta",
+        "settings": [
+          {
+            "id": "parent",
+            "type": "text",
+            "label": "Parent Menu Title"
+          },
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          },
+          {
+            "id": "heading",
+            "type": "text",
+            "label": "Heading"
+          },
+          {
+            "id": "cta_label",
+            "type": "text",
+            "label": "CTA Label",
+            "default": "Shop Now"
+          },
+          {
+            "id": "cta_link",
+            "type": "url",
+            "label": "CTA Link"
+          },
+          {
+            "id": "top_sellers_link",
+            "type": "url",
+            "label": "Top Sellers Link"
+          },
+          {
+            "id": "new_arrivals_link",
+            "type": "url",
+            "label": "New Arrivals Link"
+          },
+          {
+            "id": "sale_link",
+            "type": "url",
+            "label": "Sale Link"
+          }
+        ]
+      },
+      {
+        "name": "Menu",
+        "type": "menu",
+        "settings": [
+          {
+            "id": "parent",
+            "type": "text",
+            "label": "Parent Menu Title"
+          },
+          {
+            "id": "heading",
+            "type": "text",
+            "label": "Heading"
+          },
+          {
+            "id": "menu",
+            "type": "link_list",
+            "label": "Menu"
+          }
+        ]
+      },
+      {
+        "name": "Menu With Icons",
+        "type": "menu_with_icons",
+        "settings": [
+          {
+            "id": "parent",
+            "type": "text",
+            "label": "Parent Menu Title"
+          },
+          {
+            "id": "heading",
+            "type": "text",
+            "label": "Heading"
+          },
+          {
+            "id": "menu",
+            "type": "link_list",
+            "label": "Menu"
+          }
+        ]
+      },
+      {
+        "name": "Menu With Banner",
+        "type": "menu_with_banner",
+        "settings": [
+          {
+            "id": "parent",
+            "type": "text",
+            "label": "Parent Menu Title"
+          },
+          {
+            "id": "heading",
+            "type": "text",
+            "label": "Heading"
+          },
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          },
+          {
+            "id": "menu",
+            "type": "link_list",
+            "label": "Menu"
+          }
+        ]
+      },
+      {
+        "name": "Featured Collection",
+        "type": "featured_collection",
+        "settings": [
+          {
+            "id": "parent",
+            "type": "text",
+            "label": "Parent Menu Title"
+          },
+          {
+            "id": "collection",
+            "type": "collection",
+            "label": "Collection"
+          },
+          {
+            "id": "cta_label",
+            "type": "text",
+            "label": "CTA Label"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

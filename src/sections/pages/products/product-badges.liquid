@@ -1,0 +1,46 @@
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    window.setState('ProductBadges', [
+      {%- for block in section.blocks -%}
+        {
+          "tag": {{- block.settings.tag | json -}},
+          "color": {{- block.settings.color | json -}}
+        }
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]);
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "Product Badges",
+    "blocks": [
+      {
+        "type": "badge",
+        "name": "Product Badge",
+        "settings": [
+          {
+            "type": "text",
+            "id": "tag",
+            "label": "Product Tag"
+          },
+          {
+            "type": "select",
+            "id": "color",
+            "label": "Badge Color",
+            "default": "black",
+            "options": [
+              { "label": "Black", "value": "black" },
+              { "label": "Bright Red", "value": "error" },
+              { "label": "Alternate", "value": "alternate" },
+              { "label": "Primary", "value": "primary" },
+              { "label": "Secondary", "value": "secondary" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

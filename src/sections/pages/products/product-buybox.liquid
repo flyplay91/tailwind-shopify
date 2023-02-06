@@ -1,0 +1,177 @@
+{%- assign is_bundle = product.metafields.global.is_bundle_product -%}
+{%- assign bundle_list = product.metafields.global.bundle_product_children -%}
+
+{%- for tag in product.tags -%}
+  {%- if tag contains 'bundle_discount:' -%}
+    {%- assign bundle_discount = tag | split: ':' | last -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign collection_title = 'All Products' -%}
+{%- assign collection_link = '/collections/all' -%}
+{%- unless collection == blank -%}
+  {%- assign collection_title = collection.title -%}
+  {%- assign collection_link = collection.url -%}
+{%- endunless -%}
+
+{%- capture buybox_settings -%}
+  {
+    "showBreadcrumbs": {{- section.settings.breadcrumbs_in_buybox | default: "true" | json -}},
+    "globalPromoMessage": {{- section.settings.global_promo_message | json -}},
+    "stampedStars": {{- product.metafields.stamped.badge | json -}},
+    "showUpsells": {{- section.settings.show_upsells | json -}},
+    "upsellsBackground": {{- section.settings.upsells_background | json -}},
+    "upsellsHeader": {{- section.settings.upsells_header | json -}},
+    "upsellsCount": {{- section.settings.upsells_count | json -}}
+  }
+{%- endcapture -%}
+
+{%- if section.settings.breadcrumbs_in_buybox == 'false' -%}
+  <ul class="my-4 ccontain flex items-center">
+    <li>
+      <a href="/">
+        Home
+      </a>
+      <span class="inline-block mx-2">/</span>
+    </li>
+    <li>
+      <a href="{{- collection_link -}}">
+        {{- collection_title -}}
+      </a>
+      <span class="inline-block mx-2">/</span>
+    </li>
+    <li>
+      {{- product.title -}}
+    </li>
+  </ul>
+{%- endif -%}
+
+{%- if is_bundle -%}
+  <div id="ProductBundleBuybox" props='{ "showBreadcrumbs": {{ section.settings.breadcrumbs_in_buybox | default: "true" | json }}, "globalPromoMessage": {{ section.settings.global_promo_message | json }}, "bundleProducts": {{ bundle_list.value | json }}, "bundleDiscount": {{ bundle_discount | default: "0" | json }} }'></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      {% for product in bundle_list.value %}
+        window.setState("bundleProduct-{{ forloop.index0 }}", {{ product | json }})
+      {% endfor %}
+    })
+  </script>
+{%- else -%}
+<div id="ProductBuybox" props='{{- buybox_settings -}}'></div>
+
+<style type="text/css">
+  {%- for block in section.blocks -%}
+    .swatch-{{block.settings.swatch_name}}{
+      background-color: {{block.settings.swatch_color}};
+    }
+  {%- endfor -%}
+</style>
+{%- endif -%}
+
+{%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+
+{% schema %}
+
+{
+  "name": "Product Buybox",
+  "settings": [
+    {
+      "id": "global_promo_message",
+      "label": "Global Promo Message",
+      "type": "text",
+      "info": "This will be the fallback promo message if a product has no specific produt level promo message populated."
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }, {
+      "label": "Show Breadcrumbs In Buybox",
+      "id": "breadcrumbs_in_buybox",
+      "type": "select",
+      "options": [
+        {
+          "label": "Yes",
+          "value": "true"
+        }, {
+          "label": "No",
+          "value": "false"
+        }
+      ],
+      "default": "true"
+    }, {
+      "type": "header",
+      "content": "Upsells"
+    }, {
+      "type": "checkbox",
+      "id": "show_upsells",
+      "label": "Show Upsells Section",
+      "default": false
+    }, {
+      "type": "select",
+      "id": "upsells_background",
+      "label": "Upsells Background Color",
+      "options": [
+        {
+          "value": "bg-white",
+          "label": "White"
+        }, {
+          "value": "bg-off-white",
+          "label": "Off White"
+        }
+      ],
+      "default": "bg-white"
+    }, {
+      "type": "text",
+      "id": "upsells_header",
+      "label": "Upsells Header",
+      "default": "You May Also Like"
+    }, {
+      "type": "range",
+      "id": "upsells_count",
+      "label": "Number of Upsell Products",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "color-swatch",
+      "name": "Color Swatch",
+      "settings": [
+        {
+          "id": "swatch_name",
+          "label": "Swatch Name",
+          "type": "text"
+        }, {
+          "id": "swatch_color",
+          "label": "Swatch Color",
+          "type": "color"
+        }
+      ]
+    }
+  ],
+  "templates": ["product"],
+  "presets": [
+    {
+      "name": "Product Buybox"
+    }
+  ]
+}
+
+{% endschema %}

@@ -1,0 +1,67 @@
+<div class="sign-up">
+  <div class="ccontain-large grid grid-cols-1 lg:grid-cols-2 gap-24">
+    <div class="hidden lg:block pr-10 -ml-6">
+      <div class="h-full relative">
+        <img src="{{ 'account-register.jpg' | file_img_url: 'master' }}" class="absolute left-0 top-0 w-full h-full object-cover" loading="lazy" alt="Account Sign Up" />
+      </div>
+    </div>
+    <div class="lg:px-10 pt-12 pb-16 lg:pb-32">
+      <h1 class="text-h4 lg:text-h2">Create Account</h1>
+      <div class="border-t-[3px] border-primary mt-2 w-12"></div>
+      <p class="mt-4">
+        <span>Already have an account?</span>
+        <a href="{{ routes.account_login_url }}" class="inline-link">Sign In</a>.
+      </p>
+
+      {%- form 'create_customer', class: 'form mt-6' -%}
+        {%- if form.errors -%}
+          <div class="form-error-message">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Email {%- endcomment -%}
+        <div class="flex flex-col">
+          <div class="input-wrap">
+            <label class="input-label" for="RegsiterForm-first-name">First Name</label>
+            <input class="lg:max-w-[498px]" type="text" name="customer[first_name]" id="RegsiterForm-first-name" placeholder="Enter First Name" required data-error-message="This input is required">
+            <div class="input-error-message" data-error-for="input-error">
+              {%- render 'alert' -%}
+              <span>This is a required field.</span>
+            </div>
+          </div>
+
+          <div class="input-wrap mt-6">
+            <label class="input-label" for="RegsiterForm-last-name">Last Name</label>
+            <input class="lg:max-w-[498px]" type="text" name="customer[last_name]" id="RegsiterForm-last-name" placeholder="Enter Last Name" required data-error-message="This input is required">
+            <div class="input-error-message" data-error-for="input-error">
+              {%- render 'alert' -%}
+              <span>This is a required field.</span>
+            </div>
+          </div>
+
+          <div class="input-wrap mt-6">
+            <label class="input-label" for="RegsiterForm-email">Email</label>
+            <input class="lg:max-w-[498px]" type="email" name="customer[email]" id="RegsiterForm-email" placeholder="Enter Email" required data-error-message="This input is required">
+            <div class="input-error-message" data-error-for="input-error">
+              {%- render 'alert' -%}
+              <span>This is a required field.</span>
+            </div>
+          </div>
+
+          <div class="input-wrap mt-6">
+            <label class="input-label" for="RegsiterForm-password">Password</label>
+            <input class="lg:max-w-[498px]" type="password" id="RegsiterForm-password" name="customer[password]" placeholder="Enter Password" required data-error-message="This input is required">
+            <div class="input-error-message" data-error-for="input-error">
+              {%- render 'alert' -%}
+              <span>This is a required field.</span>
+            </div>
+          </div>
+        </div>
+
+        {%- comment -%} Submit Sign In Form {%- endcomment -%}
+        <button class="button button--secondary mt-8" type="submit">Create Account</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>

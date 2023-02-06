@@ -1,0 +1,37 @@
+table {
+	@apply w-full overflow-x-scroll lg:table pb-4 table-fixed inline-block;
+
+	thead {
+		@apply bg-off-white border-t-[4px] border-primary;
+	}
+
+	tbody {
+		tr {
+			@apply border border-grey-100;
+		}
+	}
+
+	tr {
+		@apply px-[20px] border border-grey-100;
+	}
+
+	th {
+		@apply text-sub-xs caps text-left border border-grey-100 min-w-[264px] lg:min-w-0 first:min-w-[284px] lg:first:min-w-0 lg:last:min-w-0 last:min-w-[284px] px-[12px] py-[18px] lg:py-4 lg:px-6;
+	}
+
+	td {
+		@apply text-p-xs border border-grey-100 px-[12px] py-[18px] lg:py-4 lg:px-6 tracking-[0.3px];
+	}
+
+  &::-webkit-scrollbar {
+		@apply h-2;
+	}
+
+	&::-webkit-scrollbar-track {
+		@apply mt-2 bg-grey-100;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		@apply bg-grey-300;
+	}
+}

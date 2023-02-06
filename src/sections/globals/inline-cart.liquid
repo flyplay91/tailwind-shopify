@@ -1,0 +1,188 @@
+{%- capture cart_settings -%}
+  {
+    "title": {{- section.settings.cart_title | json -}},
+    "headerText": {{- section.settings.cart_title_color | json -}},
+    "headerBackground": {{- section.settings.cart_title_background | json -}},
+    "threshold": {{- section.settings.threshold | times: 100 | default: 0 -}},
+    "thresholdMessage": {{- section.settings.threshold_text | json -}},
+    "thresholdReachedMessage": {{- section.settings.threshold_reached_text | json -}},
+    "thresholdBackground": {{- section.settings.threshold_background | json -}},
+    "thresholdTextColor": {{- section.settings.threshold_text_color | json -}},
+    "thresholdBarBackground": {{- section.settings.threshold_bar_color | json -}},
+    "disclaimerBackground": {{- section.settings.disclaimer_background | json -}},
+    "disclaimerTextColor": {{- section.settings.disclaimer_color | json -}},
+    "disclaimerText": {{- section.settings.disclaimer_text | json -}},
+    "continueShoppingText": {{- section.settings.continue_shopping_text | json -}},
+    "continueShoppingURL": "{{- section.settings.continue_shopping_url | default: "/collections/all" -}}",
+    "continueShoppingType": {{- section.settings.continue_shopping_type | json -}},
+    "showUpsells": {{- section.settings.show_upsells | json -}},
+    "upsellsBackground": {{- section.settings.upsells_grey_background | json -}},
+    "upsellsHeader": {{- section.settings.upsells_header | json -}},
+    "upsellsCount": {{- section.settings.upsells_count | json -}},
+    "upsellsCollectionId": {{- section.settings.upsells_collection_id | json -}}
+  }
+{%- endcapture -%}
+
+{%- assign cart_settings = cart_settings | replace: "'", "’" -%}
+
+<div id="InlineCart" props='{{- cart_settings -}}'></div>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    window.setState('cartState', {%- render 'cart-json' -%});
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Cart & Inline Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "text",
+        "id": "cart_title",
+        "label": "Cart Title",
+        "default": "My Cart"
+      },
+      {
+        "type": "color",
+        "id": "cart_title_color",
+        "label": "Cart Title Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "cart_title_background",
+        "label": "Cart Title Background",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Threshold"
+      },
+      {
+        "type": "number",
+        "id": "threshold",
+        "label": "Threshold",
+        "default": 75
+      },
+      {
+        "type": "text",
+        "id": "threshold_text",
+        "label": "Threshold Text",
+        "default": "Spend another $$TOTAL to get free shipping"
+      },
+      {
+        "type": "text",
+        "id": "threshold_reached_text",
+        "label": "Threshold Reached Text",
+        "default": "You qualify for free shipping!"
+      },
+      {
+        "type": "color",
+        "id": "threshold_background",
+        "label": "Threshold Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "threshold_text_color",
+        "label": "Threshold Text Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "threshold_bar_color",
+        "label": "Threshold Bar Color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Inline Cart Disclaimer"
+      },
+      {
+        "type": "color",
+        "id": "disclaimer_color",
+        "label": "Disclaimer Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "disclaimer_background",
+        "label": "Disclaimer Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "text",
+        "id": "disclaimer_text",
+        "label": "Disclaimer Text",
+        "default": "*Shipping and taxes will be calculated at checkout."
+      },
+      {
+        "type": "header",
+        "content": "Empty Cart Settings"
+      },
+      {
+        "type": "text",
+        "id": "continue_shopping_text",
+        "label": "Continue Shopping Text"
+      },
+      {
+        "type": "url",
+        "id": "continue_shopping_url",
+        "label": "Continue Shopping URL"
+      },
+      {
+        "type": "select",
+        "id": "continue_shopping_type",
+        "label": "Continue Shopping Button Type",
+        "options": [
+          { "label": "Primary", "value": "primary" },
+          { "label": "Secondary", "value": "secondary" },
+          { "label": "Tertiary", "value": "tertiary" }
+        ],
+        "default": "secondary"
+      },
+      {
+        "type": "header",
+        "content": "Upsells"
+      },
+      {
+       "type": "checkbox",
+       "id": "show_upsells",
+       "label": "Show Upsells Section",
+       "default": false
+      },
+      {
+       "type": "checkbox",
+       "id": "upsells_grey_background",
+       "label": "Show Grey Background",
+       "default": false
+      },
+      {
+       "type": "text",
+       "id": "upsells_header",
+       "label": "Upsells Header",
+       "default": "You May Also Like"
+      },
+      {
+       "type": "range",
+       "id": "upsells_count",
+       "label": "Number of Upsell Products",
+       "min": 1,
+       "max": 8,
+       "step": 1,
+       "default": 4
+      },
+      {
+       "type": "text",
+       "id": "upsells_collection_id",
+       "label": "Upsells Collection Id",
+       "info": "Populate a collection id to pull products from a specific collection."
+      }
+    ]
+  }
+{% endschema %}

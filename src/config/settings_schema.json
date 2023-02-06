@@ -1,0 +1,115 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "eHouse All Nàtural",
+    "theme_version": "0.1.0",
+    "theme_author": "eHouse",
+    "theme_documentation_url": "https:\/\/docs.google.com\/document\/d\/1R3eX5UlmY3VqsMRC8opYHLi-0GrIRke26YJJDpNAUaA",
+    "theme_support_url": "https:\/\/github.com\/Shopify\/slate"
+  },
+  {
+    "name": "Theme Settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "site_favicon",
+        "label": "Site Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Theme Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Primary Color",
+        "default": "#67C4AA"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "label": "Secondary Color",
+        "default": "#915BB4"
+      },
+      {
+        "type": "color",
+        "id": "alternate_color",
+        "label": "Alternate Color",
+        "default": "#001e61"
+      }
+    ]
+  },
+  {
+    "name": "Development Settings",
+    "settings": [
+      {
+        "type": "select",
+        "id": "display_preview",
+        "label": "Display Preview Bar",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "yes"
+          },
+          {
+            "label": "No",
+            "value": "no"
+          }
+        ],
+        "default": "yes"
+      },
+      {
+        "type": "select",
+        "id": "is_development_theme",
+        "label": "Is Development Theme?",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "yes"
+          },
+          {
+            "label": "No",
+            "value": "no"
+          }
+        ],
+        "default": "no"
+      }
+    ]
+  },
+  {
+    "name": "Social Links",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin_link",
+        "label": "Linkedin link"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "Tiktok link"
+      }
+    ]
+  }
+]

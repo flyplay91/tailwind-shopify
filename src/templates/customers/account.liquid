@@ -1,0 +1,64 @@
+<div class="overflow-hidden">
+  <div class="ccontain">
+    <div class="grid grid-cols-4 gap-10 lg:gap-16">
+      <div class="col-span-4 lg:col-span-1">
+        {%- render 'account-side-nav' -%}
+      </div>
+      <div class="col-span-4 lg:col-span-3 py-10 lg:py-20">
+        <h1 class="text-h4 md:text-h2">Order History</h1>
+        <div class="!mt-10 lg:!mt-9">
+          <div class="hidden md:grid grid-cols-10 gap-3 py-4 border-t border-b border-solid border-grey-100">
+            <div class="col-span-2 pl-3">
+              <p class="sub-s caps">Date</p>
+            </div>
+            <div class="col-span-2 pl-3">
+              <p class="sub-s caps">Order</p>
+            </div>
+            <div class="col-span-2 pl-3">
+              <p class="sub-s caps">Status</p>
+            </div>
+            <div class="col-span-2 pl-3">
+              <p class="sub-s caps">Total</p>
+            </div>
+          </div>
+
+          {%- if customer.orders != blank -%}
+            {%- paginate customer.orders by 2 -%}
+              <div class="mt-8">
+                {%- for order in customer.orders -%}
+                  <div class="grid grid-cols-10 items-center gap-3 py-6 md:py-4 md:mb-8 border-t borer-grey1-00 md:border-0">
+                    <div class="col-span-10 md:col-span-2 md:pl-3 flex items-center justify-between">
+                      <p class="md:hidden sub-s caps">Date</p>
+                      <p class="text-p-s md:text-p tracking-[0.3px]">{{ order.created_at | date: "%-m/%-d/%Y" }}</p>
+                    </div>
+                    <div class="col-span-10 md:col-span-2 md:pl-3 flex items-center justify-between">
+                      <p class="md:hidden sub-s caps">Order</p>
+                      <a href="{{ order.order_status_url }}" class="text-p-s md:text-p text-primary font-semibld md:font-normal tracking-[2px] md:tracking-[1.5px]">{{ order.name }}</a>
+                    </div>
+                    <div class="col-span-10 md:col-span-2 md:pl-3 flex items-center justify-between">
+                      <p class="md:hidden sub-s caps">Status</p>
+                      <p class="text-p-s md:text-p tracking-[0.3px] capitalize">{{ order.fulfillment_status | replace: 'fulfilled', 'shipped' }}</p>
+                    </div>
+                    <div class="col-span-10 md:col-span-2 md:pl-3 flex items-center justify-between">
+                      <p class="md:hidden sub-s caps">Total</p>
+                      <p class="text-p-s md:text-p tracking-[0.3px]">{{ order.total_price | money }}</p>
+                    </div>
+                    <div class="col-span-10 md:col-span-2 text-center md:text-right">
+                      <a href="{{ order.order_status_url }}" class="inline-block button button--tertiary">View Order</a>
+                    </div>
+                  </div>
+                {%- endfor -%}
+              </div>
+
+              <div class="mt-12">
+                {% render 'custom-pagination' paginate: paginate %}
+              </div>
+            {%- endpaginate -%}
+          {%- else -%}
+            <h5 class="font-medium my-10 md:my-14 text-center">We’re Sorry, There seems to be no order history.</h5>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

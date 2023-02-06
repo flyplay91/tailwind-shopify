@@ -1,0 +1,21 @@
+<div class="{% if background %}bg-off-white py-11{% endif %}">
+  <div class="ccontain">
+    {%- if heading -%}
+      <h2 class="mb-8">{{ heading }}</h2>
+    {%- endif -%}
+    <div class="overflow-hidden">
+      <div class="{% if layout_type == 'wrap' %}grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-3 gap-y-6 md:gap-x-6{% else %} flex flex-row gap-x-3 md:gap-x-6 scrollbar snap-mandatory pb-8{% endif %}">
+        {%- for block in blocks -%}
+          <a href="{{ block.settings.category_url }}" class="category-tile block {% if layout_type == 'scroll' %}snap-start min-w-[158px] min-h-[195px] md:min-w-[180px] md:min-h-[225px]{% endif %}{% unless background or layout_type == 'scroll' %}border border-grey-100{% endunless %} bg-white p-4">
+            <div class="flex flex-col items-center justify-between">
+              <div class="w-full">
+                <img loading="lazy" class="object-cover h-full w-full" src="{{ block.settings.image | img_url: 'medium' }}" alt="{{ block.settings.category_title }}">
+              </div>
+              <p class="mt-4 p-s font-semibold">{{ block.settings.category_title }}</p>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>

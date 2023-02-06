@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "product-buybox": {
+      "type": "product-buybox",
+      "settings": {}
+    }
+  },
+  "order": [
+    "product-buybox"
+  ]
+}

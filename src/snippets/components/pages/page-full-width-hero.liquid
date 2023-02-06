@@ -1,0 +1,53 @@
+<div {% if full_width == false %} class="ccontain" {% endif %}>
+  <div class="relative w-full h-full">
+    {%- if use_video and hero_video -%}
+      <video class="hero-video h-full w-full m-0 object-cover aspect-video" data-hero-video loop muted playsinline autoplay style="height: {{ section_max_height }};">
+        <source src="{{ hero_video }}">
+      </video>
+      <div class="video-controls__container cursor-pointer flex flex-row absolute top-7 right-7 lg:top-auto lg:bottom-[55px] z-20{% if content_alignment == 'baseline' %} lg:right-24{% else %} lg:right-auto lg:left-24{% endif %}">
+        <svg class="pause-btn" fill="none" height="30" viewbox="0 0 14 19" width="35" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.74275 0H0V19H4.74275V0Z" fill="white"/>
+          <path d="M13.9996 0H9.25684V19H13.9996V0Z" fill="white"/>
+        </svg>
+      </div>
+    {%- else -%}
+      <img class="object-cover w-full h-full lg:hidden" src="{{ hero_image_mobile | img_url: '700x' }}" alt="{{ heading }}" style="height: {{ section_max_height }};">
+      <img class="object-cover w-full h-full hidden lg:block" src="{{ hero_image | img_url: '1400x' }}" alt="{{ heading }}" style="height: {{ section_max_height }};">
+    {%- endif -%}
+    <div class="absolute h-full w-full top-0 left-0 flex items-end lg:items-center justify-center">
+      <div class="{% if background_fit == 'hug' %}lg:mx-auto lg:px-6 lg:max-w-[85rem]{% else %} h-full{% endif %} w-full flex items-end lg:items-center justify-{{ content_alignment }}">
+        <div class="{% if background_fit =='hug' %}h-fit{% else %} h-fit lg:h-full flex{% endif %} {% unless background_type == 'off' or background_type == 'semi_transparent' %}bg-{{ background_type }}{% endunless %} {% if description == blank %} w-[100vw] lg:w-auto{% endif %}" {% if background_type == 'semi_transparent' %} style="background: rgba(0, 0, 0, .{{ opacity_value }})" {% endif %}>
+          <div class="w-full flex flex-col justify-center p-6 items-{{ inner_content_alignment }} lg:max-w-[600px] {% if background_type == 'white' %}text-grey-800{% else %} text-white{% endif %}{% if background_fit =='hug' %} lg:p-20{% else %} lg:p-20 lg:px-32{% endif %}">
+            {%- if subheading != blank -%}
+              <p class="sub-xs caps mb-4">{{ subheading }}</p>
+              <div class="border-t-[3px] border-primary mb-6 w-14"></div>
+            {%- endif -%}
+            {%- if full_width == false -%}
+              <h2 class="h1 mb-4">{{ heading }}</h2>
+            {%- else -%}
+              <h1 class="h1 mb-4">{{ heading }}</h1>
+            {%- endif -%}
+            {%- if description != blank -%}
+              <div class="mb-4 p-s {{ text_alignment }}">{{ description }}</div>
+            {%- endif -%}
+            <div class="flex flex-col gap-8 mt-4">
+              {%- for link in link_blocks -%}
+                {%- if link.settings.link_type == 'button' -%}
+                  <a href="{{ link.settings.link_url }}">
+                    <button class="button button--{{ link.settings.button_scheme }}">
+                      {{ link.settings.link_text }}
+                    </button>
+                  </a>
+                {%- else -%}
+                  <div>
+                    <a class="content-link" href="{{ link.settings.link_url }}">{{ link.settings.link_text }}</a>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

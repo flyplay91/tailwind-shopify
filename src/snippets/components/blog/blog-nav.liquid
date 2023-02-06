@@ -1,0 +1,26 @@
+
+{%-liquid
+  assign activeItem = 'All Posts'
+
+  if current_tags
+    for item in navItems
+      assign tagName = item.settings.tag_name
+      assign navTitle = item.settings.nav_title
+
+      if current_tags contains tagName
+        assign activeItem = navTitle
+      endif
+    endfor
+  endif
+-%}
+
+<div class="ccontain mt-8 lg:mt-16">
+  <div class="flex items-center lg:justify-center -mx-6 lg:mx-0 px-6 lg:px-0 overflow-auto whitespace-nowrap">
+    <a href="{{ blog.url }}" class="button mx-2 shrink-0 {% if activeItem == 'All Posts' %} button--primary {% else %} button--tertiary {% endif %}">All Posts</a>
+    {%- for item in navItems -%}
+      {%- assign tagName = item.settings.tag_name -%}
+      {%- assign navTitle = item.settings.nav_title -%}
+      <a href="{{ blog.url }}/tagged/{{ tagName | handleize }}" class="button mx-2 shrink-0 {% if activeItem == navTitle %} button--primary {% else %} button--tertiary h-12 {% endif %}">{{ navTitle }}</a>
+    {%- endfor -%}
+  </div>
+</div>

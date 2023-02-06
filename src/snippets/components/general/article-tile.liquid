@@ -1,0 +1,27 @@
+<div class="w-full">
+  <a href="{{ article.url }}" class="relative block aspect-square flex items-end mb-4">
+    <div class="absolute top-0 left-0 h-full w-full">
+      <img class="object-cover h-full w-full" src="{{ article.image.src | img_url: '500x' }}" alt="{{ article.title }}" />
+    </div>
+    <div class="w-full z-10 py-4 pr-3 flex flex-row justify-start items-center" style="background: rgba(0, 0, 0, .65)">
+      <div class="w-[6px] h-14 bg-primary mr-4"></div>
+      <h4 class="text-white">{{ article.title }}</h4>
+    </div>
+  </a>
+  <div class="lg:px-4">
+    <p class="p-xs mb-2">{{ article.published_at | date: "%m/%-d/%Y" }}</p>
+    {%- if article.tags.size > 0 -%}
+      <div class="flex flex-row gap-[6px] flex-wrap mb-4">
+        {%- for tag in article.tags -%}
+          <div class="sub-s caps text-primary leading-[2px]">
+            <a href="{{ blog.url }}/tagged/{{ tagName | handleize }}">{{ tag }}</a>
+            {%- unless forloop.last -%},
+            {%- endunless -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    <p class="p-s mb-4">{{ article.excerpt }}</p>
+    <a class="content-link" href="{{ article.url }}">Read More</a>
+  </div>
+</div>

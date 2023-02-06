@@ -1,0 +1,24 @@
+[data-footer-block] {
+  &.active {
+    [data-footer-block-icon] {
+      @apply rotate-180;
+    }
+
+    [data-footer-block-body] {
+      @apply block;
+    }
+  }
+}
+
+/* Making sure that the ccpa cookie bar shows above chat bubble on desktop */
+body .cc-window.cc-banner.cc-type-opt-in.cc-default.cc-theme-block.cc-bottom {
+  @apply !z-[1] lg:!z-[9999999999];
+
+  * {
+    @apply !font-roboto;
+  }
+
+  button {
+    @apply py-2 text-p-xs tracking-[1px] font-bold uppercase transition duration-200 ml-4;
+  }
+}

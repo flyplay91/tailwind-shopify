@@ -1,0 +1,16 @@
+<script src="{{- 'layout.build.js' | asset_url -}}" defer></script>
+
+{%- assign dont_load = 'gift_card' -%}
+{%- unless dont_load contains template.name -%}
+  <script src="{{- template.name | append: '.build.js' | asset_url -}}" defer></script>
+{%- endunless -%}
+
+{%- if template.name == 'product' -%}
+  <script src="{{- 'fslightbox.js' | asset_url -}}" defer></script>
+{%- endif -%}
+
+<!-- Stamped - Begin Script-->
+<script type="text/javascript" data-api-key="pubkey-85uaxH0Ay391SY1Y1HXo0SNYKk1835" id="stamped-script-widget" src="https://cdn1.stamped.io/files/widget.min.js"></script>
+<!-- Stamped - End Script --><br>
+
+<script src="{{- 'glide.js' | asset_url -}}" defer></script>

@@ -1,0 +1,194 @@
+body {
+	@apply font-roboto text-grey-800 font-normal;
+}
+
+.page-hero {
+  h1, h2, h3, h4, h5, h6, p {
+    @apply text-white;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+	@apply font-oswald font-bold uppercase;
+}
+
+h6, .h6 {
+  @apply font-roboto font-semibold;
+}
+
+h1,
+.h1 {
+	@apply text-h1-m;
+}
+
+h2,
+.h2 {
+	@apply text-h2-m;
+}
+
+h3,
+.h3 {
+	@apply text-h3-m;
+}
+
+h4,
+.h4 {
+	@apply text-h4-m;
+}
+
+h5,
+.h5 {
+	@apply text-h5-m;
+}
+
+h6,
+.h6 {
+	@apply text-h6-m mb-4;
+}
+
+.sub-l {
+  @apply text-sub-l font-semibold font-roboto-condensed tracking-[2px];
+
+  &.caps {
+    @apply uppercase tracking-[4px];
+  }
+}
+
+.sub {
+  @apply text-sub font-semibold font-roboto-condensed tracking-[1.5px];
+
+  &.caps {
+    @apply uppercase tracking-[3px];
+  }
+}
+
+.sub-m {
+  @apply text-sub-m font-semibold font-roboto tracking-[.5px];
+
+  &.caps {
+    @apply uppercase tracking-[2px];
+  }
+}
+
+.sub-s {
+  @apply text-sub-s font-semibold font-roboto-condensed tracking-[.5px];
+
+  &.caps {
+    @apply uppercase tracking-[2px];
+  }
+}
+
+.sub-xs {
+  @apply text-sub-xs font-semibold font-roboto-condensed tracking-[.25px];
+
+  &.caps {
+    @apply uppercase tracking-[1px];
+  }
+}
+
+.sub-xxs {
+  @apply text-sub-xxs font-semibold font-roboto-condensed tracking-[.25px];
+
+  &.caps {
+    @apply uppercase tracking-[1px];
+  }
+}
+
+.p-l {
+	@apply text-p-l tracking-[0.1px];
+}
+
+.p {
+	@apply text-p tracking-[0.3px];
+}
+
+.p-s {
+	@apply text-p-s tracking-[0.3px];
+}
+
+.p-xs {
+	@apply text-p-xs tracking-[0.3px];
+}
+
+.p-xxs {
+	@apply text-p-xxs tracking-[0.3px];
+}
+
+ol {
+	@apply list-decimal pl-[20px] text-p;
+
+	li {
+		@apply pl-[20px];
+	}
+}
+
+ul {
+	@apply list-disc pl-[12px] text-p;
+
+	li {
+		@apply pl-[28px] marker:text-inherit;
+	}
+}
+
+li {
+	@apply marker:text-[16px] marker:tracking-[2px] marker:text-inherit;
+}
+
+blockquote.blockquote {
+	@apply flex flex-col gap-8 border-l-[6px] border-primary text-grey-800 px-9 pb-6;
+
+	span:last-child {
+		@apply text-sub-s uppercase tracking-[3px];
+	}
+}
+
+/* For Details/Summary */
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+
+@media screen and (min-width: 1024px) {
+	h1,
+	.h1 {
+		@apply text-h1;
+	}
+
+	h2,
+	.h2 {
+		@apply text-h2;
+	}
+
+	h3,
+	.h3 {
+		@apply text-h3;
+	}
+
+	h4,
+	.h4 {
+		@apply text-h4;
+	}
+
+	h5,
+	.h5 {
+		@apply text-h5;
+	}
+
+	h6,
+	.h6 {
+		@apply text-h6;
+	}
+}

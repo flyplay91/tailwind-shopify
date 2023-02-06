@@ -1,0 +1,16 @@
+{% layout: none %}
+
+{%- paginate collection.products by 24 -%}
+
+{
+  "title": {{- collection.title | json -}},
+  "handle": {{- collection.handle | json -}},
+  "products": [
+    {%- for product in collection.products -%}
+      {%- render 'product-json', product: product -%}
+      {%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+
+{%- endpaginate -%}

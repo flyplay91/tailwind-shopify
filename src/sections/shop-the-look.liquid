@@ -1,0 +1,120 @@
+{%- liquid
+  assign show = false
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign main_image = section.settings.main_image
+  assign cta_url = section.settings.cta_url
+  assign cta_text = section.settings.cta_text
+  assign cta_link_type = section.settings.cta_link_type
+  assign button_style = section.settings.button_style
+  assign blocks = section.blocks
+
+  if heading != blank and cta_url != blank and cta_text != blank and main_image != blank and blocks.size > 0
+    assign show = true
+  endif
+-%}
+
+{%- if show -%}
+  {%- render 'shop-the-look' heading: heading, subheading: subheading, main_image: main_image, cta_url: cta_url, cta_text: cta_text, cta_link_type: cta_link_type, button_style: button_style, blocks: blocks -%}
+
+  {%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+{%- endif -%}
+
+{% schema %}
+
+{
+  "name": "Shop The Look",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "text"
+    }, {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "text"
+    }, {
+      "id": "main_image",
+      "label": "Main Image",
+      "type": "image_picker"
+    }, {
+      "id": "cta_url",
+      "label": "CTA Url",
+      "type": "url"
+    }, {
+      "id": "cta_text",
+      "label": "CTA Text",
+      "type": "text"
+    }, {
+      "id": "cta_link_type",
+      "label": "CTA Link Type",
+      "type": "select",
+      "options": [
+        {
+          "value": "button",
+          "label": "Button"
+        }, {
+          "value": "link",
+          "label": "Content Link"
+        }
+      ]
+    }, {
+      "id": "button_style",
+      "label": "CTA Button Style",
+      "type": "select",
+      "info": "If link type is 'Button', this setting will select the style of the button.",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        }, {
+          "value": "secondary",
+          "label": "Secondary"
+        }, {
+          "value": "tertiary",
+          "label": "Tertiary"
+        }
+      ]
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Product",
+      "type": "product",
+      "settings": [
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop The Look"
+    }
+  ]
+}
+
+{% endschema %}

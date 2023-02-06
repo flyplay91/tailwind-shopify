@@ -1,0 +1,135 @@
+<div class="ccontain flex justify-{{ section.settings.content_alignment }}">
+  <div class="{% if section.settings.content_alignment == 'flex-start' %}text-left{% elsif section.settings.content_alignment == 'center' %} text-center{% else %} text-right{% endif %}">
+    <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+    {%- if section.settings.sub_heading != blank -%}
+      <p class="{{ section.settings.sub_heading_color }} {{ section.settings.sub_heading_size }}">{{ section.settings.sub_heading }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- render 'spacer',
+      _mobile_space: section.settings.bottom_margin_mobile,
+      _desktop_space: section.settings.bottom_margin_desktop -%}
+
+{% schema %}
+
+{
+  "name": "Section Title",
+  "class": "section-title__container",
+  "settings": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "text"
+    }, {
+      "id": "heading_size",
+      "label": "Heading Size",
+      "type": "select",
+      "options": [
+        {
+          "value": "h1",
+          "label": "h1"
+        }, {
+          "value": "h2",
+          "label": "h2"
+        }, {
+          "value": "h3",
+          "label": "h3"
+        }, {
+          "value": "h4",
+          "label": "h4"
+        }, {
+          "value": "h5",
+          "label": "h5"
+        }
+      ]
+    }, {
+      "id": "sub_heading",
+      "label": "Subheading",
+      "type": "text"
+    }, {
+      "id": "sub_heading_size",
+      "label": "Subheading Size",
+      "type": "select",
+      "options": [
+        {
+          "value": "sub-l caps",
+          "label": "Large"
+        }, {
+          "value": "sub-m caps",
+          "label": "Medium"
+        }, {
+          "value": "sub caps",
+          "label": "Regular"
+        }, {
+          "value": "sub-s caps",
+          "label": "Small"
+        }, {
+          "value": "sub-xs caps",
+          "label": "Xtra Small"
+        }, {
+          "value": "sub-xxs caps",
+          "label": "XXS"
+        }
+      ]
+    }, {
+      "id": "sub_heading_color",
+      "label": "Subheading Color",
+      "type": "select",
+      "options": [
+        {
+          "value": "text-primary",
+          "label": "Primary"
+        }, {
+          "value": "text-secondary",
+          "label": "Secondary"
+        }, {
+          "value": "text-grey-800",
+          "label": "Dark Grey"
+        }, {
+          "value": "text-black",
+          "label": "Black"
+        }
+      ]
+    }, {
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "type": "select",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        }, {
+          "value": "center",
+          "label": "Center"
+        }, {
+          "value": "end",
+          "label": "Right"
+        }
+      ]
+    }, {
+      "id": "bottom_margin_mobile",
+      "label": "Bottom Margin - Mobile",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 40
+    }, {
+      "id": "bottom_margin_desktop",
+      "label": "Bottom Margin - Desktop",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 70
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Title"
+    }
+  ]
+}
+
+{% endschema %}

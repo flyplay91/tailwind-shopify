@@ -1,0 +1,54 @@
+{%- liquid
+  assign show = product.metafields["custom_fields"]["product_5050_show"] | default: false
+  assign image = product.metafields["custom_fields"]["product_5050_image"]
+  assign image_alignment = product.metafields["custom_fields"]["product_5050_image_alignement"] | downcase | default: 'left'
+  assign image_aspect_ratio = product.metafields["custom_fields"]["product_5050_image_ratio"] | default: 'square'
+  assign content_alignment = product.metafields["custom_fields"]["product_5050_content_align"] | downcase | default: 'left'
+  assign heading = product.metafields["custom_fields"]["product_5050_heading"]
+  assign subheading = product.metafields["custom_fields"]["product_5050_subheading"]
+  assign description = product.metafields["custom_fields"]["product_5050_description"]
+  assign button_type = product.metafields["custom_fields"]["product_5050_button_type"] | downcase | default: 'button'
+  assign button_text = product.metafields["custom_fields"]["product_5050_button_text"] | default: 'shop now'
+  assign button_color = product.metafields["custom_fields"]["product_5050_button_color"] | downcase | default: 'primary'
+  assign button_url = product.metafields["custom_fields"]["product_5050_url"]
+  assign background = product.metafields["custom_fields"]["product_5050_background"] | default: false
+-%}
+
+{%- if show == true -%}
+  {%- if image != blank and heading != blank and button_url != blank -%}
+    <section class="product-5050__container w-full mb-10">
+      <div class="relative">
+        <div class="flex flex-col {% if image_alignment == 'left' %}md:flex-row{% else %}md:flex-row-reverse{% endif %} gap-6 md:gap-24 md:mx-auto md:px-6 md:max-w-[85rem] items-center justify-center">
+          <div class="w-full max-w-[480px] md:aspect-[4/5]">
+            {%- if image_aspect_ratio == '4:5' -%}
+              <img loading="lazy" class="h-full w-[90vw] mx-auto aspsect-[4/5] md:object-cover" src="{{ image | img_url: 'large' }}" alt="{{ heading }}">
+            {%- else -%}
+              <img loading="lazy" class="h-full w-full aspect-square object-cover md:mx-auto" src="{{ image | img_url: 'large' }}" alt="{{ heading }}">
+            {%- endif -%}
+          </div>
+          <div class="w-full flex flex-col items-{{ content_alignment }} justify-center max-w-[525px] md:w-auto md:max-w-full pb-8 px-6 md:!p-0">
+            {%- if subheading != blank -%}
+              <h5 class="mb-4 sub-s caps">{{ subheading }}</h5>
+            {%- endif -%}
+            <h2 class="mb-4 h2">{{ heading }}</h2>
+            {%- if description != blank -%}
+              <div class="mb-8 p-s md:text-p text-{{ content_alignment }} md:max-w-[430px]">{{ description }}</div>
+            {%- endif -%}
+            {%- if button_type == 'button' -%}
+              <a href="{{ button_url }}" target="_blank">
+                <button class="font-roboto-condensed button button--{{ button_color }}">{{ button_text | capitalize}}</button>
+              </a>
+            {%- else -%}
+              <div>
+                <a class="content-link font-roboto-condensed" target="_blank" href="{{ button_url }}">{{ button_text | capitalize }}</a>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- if background -%}
+          <div class="-z-10 absolute bottom-0 left-0 w-full h-3/4 bg-off-white md:m-auto md:top-0 md:right-0"></div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+{%- endif -%}

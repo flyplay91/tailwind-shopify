@@ -1,0 +1,75 @@
+.wysiwyg p {
+  @apply my-6;
+}
+
+.wysiwyg ol,
+.wysiwyg ul {
+  @apply my-6 pl-6;
+}
+
+.wysiwyg img {
+  @apply w-full;
+}
+
+.wysiwyg #aaa-form-builder {
+  @apply !my-6 !bg-transparent;
+
+  input[type='text'],
+  input[type='email'],
+  input[type="search"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"] {
+    @apply !px-5 !py-4;
+  }
+
+  label {
+    @apply text-p-xs font-semibold font-roboto-condensed uppercase leading-[1px];
+  }
+
+  .radio-group {
+    input[type="radio"] {
+      @apply !px-3 !py-[2px];
+    }
+
+    label {
+      @apply !ml-3;
+    }
+
+    br {
+      font-size: 7px;
+      content: "A" !important;
+      display: block !important;
+      margin-bottom: 1.5em !important;
+    }
+  }
+
+  .checkbox-group {
+    input[type="checkbox"] {
+      @apply !px-[10px] !py-[1px];
+    }
+
+    label {
+      @apply !ml-3;
+    }
+
+    br {
+      font-size: 7px;
+      content: "A" !important;
+      display: block !important;
+      margin-bottom: 1.5em !important;
+    }
+  }
+
+  textarea {
+    @apply !min-h-[100px];
+  }
+
+  button {
+    @apply font-roboto-condensed min-w-[105px] py-3 px-6 text-p-s leading-6 tracking-[1px] font-bold uppercase transition duration-200;
+  }
+
+  button:hover {
+    background-color: #000 !important;
+  }
+}

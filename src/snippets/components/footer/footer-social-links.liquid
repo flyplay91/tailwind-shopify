@@ -1,0 +1,30 @@
+<ul class="list-none flex items-center p-0 -mx-1 group">
+  {%- if settings.social_instagram_link != blank -%}
+    <li class="p-0 mx-1">
+      <a href="{{ settings.social_instagram_link }}" target="_blank" class="flex items-center justify-center w-7 h-7 text-grey-100 group-hover:opacity-[.65] hover:text-white group-hover:hover:opacity-100">
+        {%- render 'icon-instagram', fill: 'currentColor', width: 20, height: 20 -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_facebook_link != blank -%}
+    <li class="p-0 mx-1">
+      <a href="{{ settings.social_facebook_link }}" target="_blank" class="flex items-center justify-center w-7 h-7 text-grey-100 group-hover:opacity-[.65] hover:text-white group-hover:hover:opacity-100">
+        {%- render 'icon-facebook', fill: 'currentColor', width: 20, height: 20 -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_youtube_link != blank -%}
+    <li class="p-0 mx-1">
+      <a href="{{ settings.social_youtube_link }}" target="_blank" class="flex items-center justify-center w-7 h-7 text-grey-100 group-hover:opacity-[.65] hover:text-white group-hover:hover:opacity-100">
+        {%- render 'icon-youtube', fill: 'currentColor', width: 20, height: 20 -%}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_pinterest_link != blank -%}
+    <li class="p-0 mx-1">
+      <a href="{{ settings.social_pinterest_link }}" target="_blank" class="flex items-center justify-center w-7 h-7 text-grey-100 group-hover:opacity-[.65] hover:text-white group-hover:hover:opacity-100">
+        {%- render 'icon-pinterest', fill: 'currentColor', width: 20, height: 20 -%}
+      </a>
+    </li>
+  {%- endif -%}
+</ul>

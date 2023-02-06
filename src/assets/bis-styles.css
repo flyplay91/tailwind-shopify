@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Roboto:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+  color: #323332;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Oswald', sans-serif;
+  color: #000;
+}
+
+#container {
+  margin-top: 60%;
+}
+
+.modal-title {
+  max-width: 285px;
+}
+
+@media (min-width: 1024px) {
+  .modal-title {
+    max-width: 100%;
+  }
+}
+
+button.btn.btn-success {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: white;
+  background-color: #D80032;
+  transition: all ease-in-out .2s;
+  letter-spacing: 1px;
+  line-height: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+}
+
+button.btn.btn-success:hover {
+  background-color: #000;
+}

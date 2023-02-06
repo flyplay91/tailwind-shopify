@@ -1,0 +1,121 @@
+{%-liquid
+  assign menu = linklists[section.settings.menu]
+  assign color_scheme = section.settings.color_scheme
+  assign autoplay_speed = section.settings.autoplay_speed
+  assign messages = section.blocks
+-%}
+<div class="py-3 {{ color_scheme }}">
+  <div class="ccontain">
+    <div class="flex items-center">
+      <div class="hidden md:block flex-1">
+        {%- if menu -%}
+          <ul class="list-none flex items-center text-white p-0 -mx-2 lg:-mx-4">
+            {%- for link in menu.links -%}
+              <li class="mx-2 lg:mx-4 p-0">
+                <a href="{{ link.url }}" class="p-s">{{ link.title }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+      <div class="relative w-full md:w-auto" data-messages-slider-container>
+        <div data-messages-slider data-autoplay-speed="{{ autoplay_speed }}">
+          {%- for message in messages -%}
+            {%- assign message_body = message.settings.body -%}
+            {%- assign message_body_mobile = message.settings.body_mobile | default: message_body -%}
+
+            <div class="text-center sub-xs caps px-6 md:px-10" data-messages-slider-content>
+              <div class="hidden md:block">{{ message_body }}</div>
+              <div class="md:hidden">{{ message_body_mobile }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div data-messages-slider-controls>
+          <button class="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 p-2">
+            {%- render 'icon-chevron-left' -%}
+          </button>
+          <button class="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 p-2">
+            {%- render 'icon-chevron-right' -%}
+          </button>
+        </div>
+      </div>
+      <div class="hidden lg:block flex-1 text-right">
+        <div class="transcy-switcher-manual transcy-desktop hidden"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+
+{
+  "name": "Site Announcement",
+  "class": "siteAnnouncement",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    }, {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    }, {
+      "type": "header",
+      "content": "Apperance"
+    }, {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "options": [
+        {
+          "value": "bg-primary text-white",
+          "label": "Primary"
+        }, {
+          "value": "bg-secondary text-white",
+          "label": "Secondary"
+        }, {
+          "value": "bg-black text-white",
+          "label": "Black"
+        }, {
+          "value": "bg-alternate text-white",
+          "label": "Alternate"
+        }, {
+          "value": "bg-grey-800 text-white",
+          "label": "Grey"
+        }
+      ],
+      "default": "bg-primary text-white"
+    }, {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay Speed",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "sec",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "info": " Recommended character counts are 40 - 56"
+        }, {
+          "type": "richtext",
+          "id": "body_mobile",
+          "label": "Body (Mobile)",
+          "info": " Recommended character counts are 20 - 24"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

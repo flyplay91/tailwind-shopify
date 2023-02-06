@@ -1,0 +1,19 @@
+{%-liquid
+  assign hero_title = blog.title
+  assign hero_image = blog.metafields.custom.hero_image
+  assign hero_desc = blog.metafields.custom.hero_desc
+-%}
+
+<div class="relative py-8 lg:py-[50px] text-left lg:text-center">
+  {%- if hero_image -%}
+    <img src="{{ hero_image | image_url }}" class="absolute w-full h-full left-0 top-0 object-cover" />
+  {%- endif -%}
+  <div class="relative lg:max-w-[600px] lg:mx-auto lg:py-16 px-6 lg:px-[120px] lg:bg-black-overlay text-white">
+    <h1 class="text-h2-m md:text-h2">{{ hero_title }}</h1>
+    <div class="w-[50px] h-[3px] bg-primary lg:mx-auto mt-4"></div>
+
+    {%- if hero_desc != blank -%}
+      <div class="p mt-4">{{ hero_desc }}</div>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}">
+  <head>
+    {%- render 'theme-head' -%}
+    {%- render 'head-meta' -%}
+    {{ content_for_header }}
+
+    {% include 'boost-pfs-style' %}
+    {%  include 'fa_translate_custom' %}
+  </head>
+  <body class="flex flex-col min-h-screen {% unless settings.display_preview == 'yes' -%}hide-preview-bar{%- endunless -%}">
+    <a class="visually-hidden skip-link" href="#MainContent">
+      Skip to content
+    </a>
+
+    {%- section 'site-announcement' -%}
+    {%- section 'site-header' -%}
+
+    <main class="grow" id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {%- section 'site-footer' -%}
+
+    {%- section 'inline-cart' -%}
+    {%- section 'product-badges' -%}
+
+    {%- render 'theme-colors' -%}
+    {%- render 'structured-data' -%}
+    {%- render 'dto' -%}
+    {%- render 'external-scripts' -%}
+    {%- render 'dev-scripts' -%}
+
+    {% include 'boost-pfs' %}
+    {%- render 'klaviyo-bis' -%}
+
+    <!-- Stamped - Begin Script-->
+    <script async data-api-key="pubkey-85uaxH0Ay391SY1Y1HXo0SNYKk1835" id="stamped-script-widget" src="https://cdn1.stamped.io/files/widget.min.js" type="text/javascript"></script>
+    <!-- Stamped - End Script --><br>
+
+    <!--Gorgias Chat Widget Start--><script id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=25297"></script><!--Gorgias Chat Widget End-->
+
+  </body>
+
+  <!-- For Trancsy -->
+  <style>
+    body.header-menu-opened:before,
+    .siteHeader {
+      z-index: 99;
+    }
+  </style>
+</html>

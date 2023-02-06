@@ -1,0 +1,28 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+@import '/lib/resets.css';
+@import '/lib/tiny-slider.css';
+
+@import '/components/buttons';
+@import '/components/table';
+@import '/components/containers';
+@import '/components/inputs';
+@import '/components/scrollbars';
+@import '/components/typography';
+@import '/components/links';
+
+@import '/sections/footer';
+@import '/sections/announcement';
+@import '/sections/header';
+@import '/sections/content-modules';
+
+@import '/pages/product';
+@import '/pages/wysiwyg';
+@import '/pages/cart';
+@import '/pages/account';
+
+@import '/apps/pfs';
+@import '/apps/transcy';

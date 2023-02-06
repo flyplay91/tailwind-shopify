@@ -1,0 +1,13 @@
+<script type="text/javascript">
+  window.eHS = {
+    template: {{ template | json }},
+    cart: {{- cart | json -}},
+    customer: {{- customer | json -}},
+  };
+
+  {%- if template.name == 'product' -%}
+    window.eHS.product = {%- render 'product-json' -%}
+  {%- elsif template.name == 'collection' -%}
+    window.eHS.collection = {%- render 'collection-json' -%}
+  {%- endif -%}
+</script>
